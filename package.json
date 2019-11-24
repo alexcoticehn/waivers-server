@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "description": "Server side code for SJ Waivers app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "./node_modules/.bin/eslint src/*.js",
+    "start": "./node_modules/.bin/nodemon src/app.js"
+  },
+  "author": "Alex Cotic-Ehn",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "nodemon": "^2.0.0"
+  }
+}

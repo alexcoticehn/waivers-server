@@ -25,7 +25,8 @@ router.post('/login', auth.optional, (req, res, next) => {
         });
     }
 
-    return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+    // eslint-disable-next-line no-unused-vars
+    return passport.authenticate('local', { session: false }, (err, passportUser, _info) => {
         if (err) {
             return next(err);
         }

@@ -17,7 +17,7 @@ app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'secret', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
 if (!isProduction) {
   app.use(errorHandler());
@@ -37,8 +37,11 @@ require('./models/Users');
 // Passport Config (must be below models)
 require('./config/passport');
 
+// Controllers
+require('./controllers');
+
 if (!isProduction) {
-    app.use((err, req, res) => {
+    app.use((err, req, res, next) => {
         res.status(err.status || 500);
 
         res.json({
@@ -50,7 +53,7 @@ if (!isProduction) {
     });
 }
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
 
     res.json({

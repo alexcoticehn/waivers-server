@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const router = require('express').Router();
-const auth = require('../middlewares/auth');
+const auth = require('../../services/auth');
 const Users = mongoose.model('Users');
 
 // POST login route (optional, everyone has access)
@@ -42,7 +42,8 @@ router.post('/login', auth.optional, (req, res, next) => {
 });
 
 // GET current route (required, only authenticated users have access)
-router.get('/current', auth.required, (req, res, next) => {
+// eslint-disable-next-line no-unused-vars
+router.get('/current', auth.required, (req, res, _next) => {
     const { payload: { id } } = req;
 
     return Users.findById(id)

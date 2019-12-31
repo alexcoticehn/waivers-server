@@ -37,8 +37,8 @@ require('./models/Users');
 // Passport Config (must be below models)
 require('./config/passport');
 
-// Controllers
-app.use(require('./controllers'));
+// Routes
+app.use(require('./routes'));
 
 if (!isProduction) {
     // eslint-disable-next-line no-unused-vars

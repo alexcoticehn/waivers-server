@@ -16,3 +16,5 @@ UsersSchema.methods.setPassword = function(password) {
 UsersSchema.methods.validatePassword = function(password) {
     return this.password === password;
 }
+
+

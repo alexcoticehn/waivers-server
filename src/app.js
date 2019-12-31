@@ -38,7 +38,7 @@ require('./models/Users');
 require('./config/passport');
 
 // Controllers
-require('./controllers');
+app.use(require('./controllers'));
 
 if (!isProduction) {
     app.use((err, req, res, next) => {

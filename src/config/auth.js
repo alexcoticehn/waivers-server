@@ -14,8 +14,7 @@ const auth = {
     required: jwt({
         secret: 'secret',
         userProperty: 'payload',
-        getToken: getTokenFromHeaders,
-        credentialsRequired: false
+        getToken: getTokenFromHeaders
     }),
     optional: jwt({
         secret: 'secret',

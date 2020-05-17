@@ -4,13 +4,14 @@ const passport = require('passport');
 const router = require('express').Router();
 const auth = require('../../middlewares/auth');
 const Users = mongoose.model('Users');
+const status_codes = require('../status_codes');
 
 // POST login route (optional, everyone has access)
 router.post('/login', auth.optional, (req, res, next) => {
     const { body: { user }} = req;
 
     if (!user.username) {
-        return res.status(422).json({
+        return res.status(status_codes.UNPROCESSABLE_ENTITY).json({
             errors: {
                 username: 'is required'
             }
@@ -18,7 +19,7 @@ router.post('/login', auth.optional, (req, res, next) => {
     }
 
     if (!user.password) {
-        return res.status(422).json({
+        return res.status(status_codes.UNPROCESSABLE_ENTITY).json({
             errors: {
                 password: 'is required'
             }
@@ -38,7 +39,7 @@ router.post('/login', auth.optional, (req, res, next) => {
             return res.json({ user: user.toAuthJSON() });
         }
 
-        return status(400).info;
+        return status(status_codes.BAD_REQUEST).info;
     })(req, res, next);
 });
 
@@ -50,7 +51,7 @@ router.get('/current', auth.required, (req, res, _next) => {
     return Users.findById(id)
         .then((user) => {
             if (!user) {
-                return res.sendStatus(400);
+                return res.sendStatus(status_codes.BAD_REQUEST);
             }
 
             return res.json({ user: user.toAuthJSON() });

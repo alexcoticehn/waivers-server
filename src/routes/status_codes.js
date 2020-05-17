@@ -1,2 +1,5 @@
-const UNPROCESSABLE_ENTITY = 422;
-const BAD_REQUEST = 400;
+// eslint-disable-next-line no-undef
+module.exports = {
+    UNPROCESSABLE_ENTITY: 422,
+    BAD_REQUEST: 400
+}

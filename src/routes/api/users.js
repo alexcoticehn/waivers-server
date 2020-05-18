@@ -43,7 +43,7 @@ router.post('/login', auth.optional, (req, res, next) => {
     })(req, res, next);
 });
 
-// GET current route (required, only authenticated users have access)
+// GET current user route (required, only authenticated users have access)
 // eslint-disable-next-line no-unused-vars
 router.get('/current', auth.required, (req, res, _next) => {
     const { payload: { id } } = req;
@@ -56,6 +56,25 @@ router.get('/current', auth.required, (req, res, _next) => {
 
             return res.json({ user: user.toAuthJSON() });
         });
+});
+
+// PATCH reset password route (required, only authenticated users have access)
+// eslint-disable-next-line no-unused-vars
+router.patch('/resetpassword', auth.required, (req, res, _next) => {
+    const { body: { user } } = req;
+
+    if (!user.new_password) {
+        return res.status(status_codes.UNPROCESSABLE_ENTITY).json({
+            errors: {
+                new_password: 'is required'
+            }
+        });
+    }
+
+    let user_entity = Users.findById(user.id);
+    user_entity.setPassword(user.new_password);
+
+    return res.sendStatus(status_codes.OK);
 });
 
 // eslint-disable-next-line no-undef

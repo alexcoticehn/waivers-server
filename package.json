@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
-    "start": "./node_modules/.bin/nodemon ./src/app.js"
+    "start": "./node_modules/.bin/nodemon ./src/app.js",
+    "debug": "./node_modules/.bin/nodemon --inspect ./src/app.js"
   },
   "author": "Alex Cotic-Ehn",
   "dependencies": {

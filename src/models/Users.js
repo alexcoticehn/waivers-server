@@ -11,10 +11,6 @@ const UsersSchema = new Schema({
   password: String
 });
 
-UsersSchema.methods.setPassword = function(password) {
-    this.password = password;
-}
-
 UsersSchema.methods.validatePassword = function(password) {
     return this.password === password;
 }

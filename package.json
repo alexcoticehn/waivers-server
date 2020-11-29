@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
     "start": "./node_modules/.bin/nodemon ./src/app.js",
-    "debug": "./node_modules/.bin/nodemon --inspect=8080 ./src/app.js"
+    "debug": "./node_modules/.bin/nodemon --inspect=8080 ./src/app.js",
+    "create": "node ./src/bin/create_db.js"
   },
   "author": "Alex Cotic-Ehn",
   "dependencies": {
@@ -19,7 +20,8 @@
     "express-jwt": "^5.3.3",
     "express-session": "^1.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.15",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.10.17",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

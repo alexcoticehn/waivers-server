@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 /*global require*/
 // eslint-disable-next-line no-unused-vars
+require('./config/mongoose');
 const mongoose = require('mongoose');
 
 const express = require('express');

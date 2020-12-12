@@ -84,6 +84,7 @@ const Peter = {
 
 UsersModel.insertMany([Dimitri, Alex, Harrison, Chris, Eric, Ian, Stefan, Jimmy, Nathan, Peter])
     .then(() => {
+        console.log("Users added successfully");
         process.exit();
     })
     .catch((err) => {

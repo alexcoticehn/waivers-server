@@ -1,7 +1,9 @@
 /*global require*/
+require('./mongoose');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const SaltRounds = 10;
 
 const Users = mongoose.model('Users');
 
@@ -17,3 +19,6 @@ passport.use(new LocalStrategy({
             return done(null, user);
         }).catch(done);
 }));
+
+// eslint-disable-next-line no-undef
+module.exports = SaltRounds;

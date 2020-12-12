@@ -1,6 +1,7 @@
 /* global require */
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 var Schema = mongoose.Schema;
 
@@ -11,8 +12,11 @@ const UsersSchema = new Schema({
   password: String
 });
 
-UsersSchema.methods.validatePassword = function(password) {
-    return this.password === password;
+UsersSchema.methods.isValidPassword = async function(password) {
+    const user = this;
+    const compare = await bcrypt.compare(password, user.password);
+
+    return compare;
 }
 
 UsersSchema.methods.generateJWT = function() {

@@ -8,10 +8,9 @@ const UsersModel = mongoose.model('Users');
 UsersModel.deleteMany()
     .catch((err) => {
         console.log(err);
+        process.exit();
     })
-    .then((res) => {
-        console.log(res);
-    });
+    .then(() => {});
 
 const Dimitri = {
     username: "dfilipovic",
@@ -84,10 +83,10 @@ const Peter = {
 };
 
 UsersModel.insertMany([Dimitri, Alex, Harrison, Chris, Eric, Ian, Stefan, Jimmy, Nathan, Peter])
-    .then((doc) => {
-        console.log(doc);
+    .then(() => {
         process.exit();
     })
     .catch((err) => {
         console.log(err);
+        process.exit();
     });

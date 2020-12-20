@@ -10,8 +10,13 @@ passport.use('login', new LocalStrategy({
     passwordField: 'user[password]',
 }, (username, password, done) => {
     Users.findOne({ username })
-        .then((user) => {
-            if (!user || !user.isValidPassword(password)) {
+        .then(async (user) => {
+            if (!user) {
+                return done(null, false, { errors: {'username or password': 'is invalid'}});
+            }
+            
+            const valid_password = await user.isValidPassword(password);
+            if (!valid_password) {
                 return done(null, false, { errors: {'username or password': 'is invalid'}});
             }
             return done(null, user);

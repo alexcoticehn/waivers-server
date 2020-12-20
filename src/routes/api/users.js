@@ -40,11 +40,11 @@ router.post("/login", (req, res, next) => {
         return res.json({ token });
       }
 
-      return res.status(status_codes.BAD_REQUEST).json({
-        errors: {
-          password: "is incorrect",
-        },
-      });
+      if (_info.errors) {
+        return res.status(status_codes.UNAUTHORIZED).json({
+          errors: _info.errors
+        })
+      }
     }
   )(req, res, next);
 });

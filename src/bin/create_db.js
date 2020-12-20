@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
 /*global require*/
+/*global process*/
 require('../config/mongoose/mongoose');
 require('../models/Users');
 

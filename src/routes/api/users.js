@@ -1,13 +1,13 @@
 /* global require */
-const mongoose = require("mongoose");
-const passport = require("passport");
+const mongoose = require("../../config/mongoose/mongoose");
+const passport = require("../../middlewares/auth/passport/passport");
 const router = require("express").Router();
 const auth = require("../../middlewares/auth/auth");
 const Users = mongoose.model("Users");
 const status_codes = require("../status_codes");
 
 // POST login route (optional, everyone has access)
-router.post("/login", auth.optional, (req, res, next) => {
+router.post("/login", (req, res, next) => {
   const {
     body: { user },
   } = req;
@@ -35,10 +35,9 @@ router.post("/login", auth.optional, (req, res, next) => {
       }
 
       if (passportUser) {
-        const user = passportUser;
-        user.token = passportUser.generateJWT();
+        const token = passportUser.generateJWT();
 
-        return res.json({ user: user.toAuthJSON() });
+        return res.json({ token });
       }
 
       return res.status(status_codes.BAD_REQUEST).json({

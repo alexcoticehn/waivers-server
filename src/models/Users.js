@@ -1,4 +1,5 @@
 /* global require */
+/* global process */
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -37,7 +38,7 @@ UsersSchema.methods.generateJWT = function() {
         username: this.username,
         id: this._id,
         exp: parseInt(expirationDate.getTime() / 1000, 10)
-    }, 'secret');
+    }, process.env.JWT_SECRET);
 };
 
 UsersSchema.methods.toAuthJSON = function() {

@@ -17,5 +17,7 @@ passport.use('login', new LocalStrategy({
             }
             return done(null, user);
         })
-        .catch(done);
+        .catch((err) => {
+            return done(err);
+        });
 }));

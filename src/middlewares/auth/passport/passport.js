@@ -14,7 +14,7 @@ passport.use('login', new LocalStrategy({
             if (!user) {
                 return done(null, false, { errors: {'username or password': 'is invalid'}});
             }
-            
+
             const valid_password = await user.isValidPassword(password);
             if (!valid_password) {
                 return done(null, false, { errors: {'username or password': 'is invalid'}});

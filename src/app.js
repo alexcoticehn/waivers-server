@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 /*global require*/
 // eslint-disable-next-line no-unused-vars
-require('./config/mongoose');
+require('./config/mongoose/mongoose');
 const mongoose = require('mongoose');
 
 const express = require('express');
@@ -31,7 +31,7 @@ if (!isProduction) {
 require('./models/Users');
 
 // Passport Config (must be below models)
-require('./config/passport');
+require('./config/passport/passport');
 
 // Routes
 app.use(require('./routes'));

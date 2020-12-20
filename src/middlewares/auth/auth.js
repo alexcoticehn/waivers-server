@@ -16,7 +16,6 @@ const auth = {
     optional: jwt({
         secret: 'secret',
         userProperty: 'payload',
-        getToken: getTokenFromHeaders,
         credentialsRequired: false
     })
 };

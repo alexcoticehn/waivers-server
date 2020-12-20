@@ -2,6 +2,7 @@
 const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const SaltRounds = require("../config/passport/passport");
 
 var Schema = mongoose.Schema;
 
@@ -10,6 +11,14 @@ const UsersSchema = new Schema({
   firstname: String,
   lastname: String,
   password: String
+});
+
+UsersSchema.pre('save', async function(next) {
+    const user = this;
+    const hash = await bcrypt.hash(this.password, SaltRounds);
+
+    this.password = hash;
+    next();
 });
 
 UsersSchema.methods.isValidPassword = async function(password) {

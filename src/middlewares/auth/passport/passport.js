@@ -1,9 +1,8 @@
-/*global require*/
-require('./mongoose');
+/* global require */
+require('../mongoose/mongoose');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const SaltRounds = 10;
 
 const Users = mongoose.model('Users');
 
@@ -17,8 +16,6 @@ passport.use(new LocalStrategy({
                 return done(null, false, { errors: {'username or password': 'is invalid'}});
             }
             return done(null, user);
-        }).catch(done);
+        })
+        .catch(done);
 }));
-
-// eslint-disable-next-line no-undef
-module.exports = SaltRounds;

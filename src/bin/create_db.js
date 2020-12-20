@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
 /*global require*/
-require('../config/mongoose');
+require('../config/mongoose/mongoose');
 require('../models/Users');
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const SaltRounds = require('../config/passport');
+const SaltRounds = require('../config/passport/passport');
 const UsersModel = mongoose.model('Users');
 
 function clearUsers() {

@@ -36,6 +36,7 @@ async function runScript() {
         username: "dfilipovic",
         firstname: "Dimitri",
         lastname: "Filipovic",
+        email: "dimitri.filipovic@gmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -43,6 +44,7 @@ async function runScript() {
         username: "hbrown",
         firstname: "Harrison",
         lastname: "Brown",
+        email: "c.harrison.brown@gmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -50,6 +52,7 @@ async function runScript() {
         username: "acoticehn",
         firstname: "Alex",
         lastname: "Cotic-Ehn",
+        email: "alcabc7@hotmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -57,6 +60,7 @@ async function runScript() {
         username: "clittomericzky",
         firstname: "Chris",
         lastname: "Littomericzky",
+        email: "chris_litto@hotmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -64,6 +68,7 @@ async function runScript() {
         username: "ewallin",
         firstname: "Eric",
         lastname: "Wallin",
+        email: "ericaxelwallin@gmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -71,6 +76,7 @@ async function runScript() {
         username: "icarter",
         firstname: "Ian",
         lastname: "Carter",
+        email: "ian.carter@live.ca",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -78,6 +84,7 @@ async function runScript() {
         username: "skalaba",
         firstname: "Stefan",
         lastname: "Kalaba",
+        email: "stefan.kalaba@hotmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -85,6 +92,7 @@ async function runScript() {
         username: "jghuman",
         firstname: "Jimmy",
         lastname: "Ghuman",
+        email: "jimmyghuman@hotmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -92,6 +100,7 @@ async function runScript() {
         username: "nalvarez",
         firstname: "Nathan",
         lastname: "Alvarez",
+        email: "nla86@hotmail.ca",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 
@@ -99,6 +108,7 @@ async function runScript() {
         username: "pbohdal",
         firstname: "Peter",
         lastname: "Bohdal",
+        email: "peterbohdal@gmail.com",
         password: await bcrypt.hash("123456789", SaltRounds)
     };
 

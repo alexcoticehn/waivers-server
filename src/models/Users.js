@@ -1,6 +1,6 @@
 /* global require */
 /* global process */
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const SaltRounds = require("../config/passport/passport");
@@ -11,6 +11,7 @@ const UsersSchema = new Schema({
   username: String,
   firstname: String,
   lastname: String,
+  email: String,
   password: String
 });
 

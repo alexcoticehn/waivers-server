@@ -9,5 +9,6 @@ const LinksSchema = new Schema({
   user_id: {
       type: Schema.Types.ObjectId,
       ref: 'Users'
-  }
+  },
+  tokenExpires: Date
 });

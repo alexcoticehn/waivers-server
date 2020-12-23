@@ -49,20 +49,6 @@ router.post("/login", (req, res, next) => {
   )(req, res, next);
 });
 
-// GET current user route (required, only authenticated users have access)
-// eslint-disable-next-line no-unused-vars
-router.get("/current", auth.required, (req, res, _next) => {
-  const { payload: { id } } = req;
-
-  return Users.findById(id).then((user) => {
-    if (!user) {
-      return res.sendStatus(status_codes.BAD_REQUEST);
-    }
-
-    return res.json({ user: user.toAuthJSON() });
-  });
-});
-
 // PATCH reset password route (required, only authenticated users have access)
 // eslint-disable-next-line no-unused-vars
 router.patch("/resetpassword", auth.required, (req, res, _next) => {

@@ -7,6 +7,7 @@ const SaltRounds = require("../config/passport/passport");
 
 var Schema = mongoose.Schema;
 
+// Define schema
 const UsersSchema = new Schema({
   username: String,
   firstname: String,
@@ -15,6 +16,9 @@ const UsersSchema = new Schema({
   password: String
 });
 
+/**
+ * Prior to saving user, hash password
+ */
 UsersSchema.pre('save', async function(next) {
     const user = this;
     const hash = await bcrypt.hash(user.password, SaltRounds);
@@ -23,6 +27,10 @@ UsersSchema.pre('save', async function(next) {
     next();
 });
 
+/**
+ * Check if password provided is correct for given user
+ * @param {string} password 
+ */
 UsersSchema.methods.isValidPassword = async function(password) {
     const user = this;
     const compare = await bcrypt.compare(password, user.password);
@@ -30,6 +38,10 @@ UsersSchema.methods.isValidPassword = async function(password) {
     return compare;
 }
 
+/**
+ * Generate and return json web token when user is logged in
+ * JWT to be used to for future requests
+ */
 UsersSchema.methods.generateJWT = function() {
     const today = new Date();
     const expirationDate = new Date(today);
@@ -40,14 +52,6 @@ UsersSchema.methods.generateJWT = function() {
         id: this._id,
         exp: parseInt(expirationDate.getTime() / 1000, 10)
     }, process.env.JWT_SECRET);
-};
-
-UsersSchema.methods.toAuthJSON = function() {
-    return {
-        _id: this._id,
-        username: this.username,
-        token: this.generateJWT()
-    };
 };
 
 mongoose.model('Users', UsersSchema);

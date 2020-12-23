@@ -13,4 +13,4 @@ const LinksSchema = new Schema({
   }
 });
 
-mongoose.model('Users', LinksSchema);
+mongoose.model('PasswordResetLinks', LinksSchema);

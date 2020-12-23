@@ -4,6 +4,7 @@ const passport = require("../../middlewares/auth/passport/passport");
 const router = require("express").Router();
 const auth = require("../../middlewares/auth/auth");
 const Users = mongoose.model("Users");
+const passwordResetMiddleware = require('../../middlewares/users/passwordReset');
 const status_codes = require("../status_codes");
 
 // POST login route (optional, everyone has access)
@@ -49,9 +50,39 @@ router.post("/login", (req, res, next) => {
   )(req, res, next);
 });
 
+router.post('/reset/send', (req, res, _next) => {
+  const {
+    body: { user },
+  } = req;
+
+  if (!user.email) {
+    return res.status(status_codes.UNPROCESSABLE_ENTITY).json({
+      errors: {
+        email: "is required",
+      },
+    });
+  }
+
+  Users.findOne({email: user.email})
+    .then((user) => {
+      if (!user) {
+        return res.status(status_codes.UNAUTHORIZED).json({
+          errors: {
+            email: "is not associated with an account"
+          }
+        })
+      }
+
+      passwordResetMiddleware.createPasswordResetLink(user._id)
+        .then(() => {
+          return res.status(status_codes.OK).json({});
+        }).catch();
+    })
+})
+
 // PATCH reset password route (required, only authenticated users have access)
 // eslint-disable-next-line no-unused-vars
-router.patch("/resetpassword", auth.required, (req, res, _next) => {
+router.patch("/reset/password", auth.required, (req, res, _next) => {
   const { body: { user } } = req;
 
   let new_password = user.new_password;

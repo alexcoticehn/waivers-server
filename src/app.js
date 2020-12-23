@@ -27,8 +27,9 @@ if (!isProduction) {
   app.use(errorHandler());
 }
 
-// Models & Routes
+// Models
 require('./models/Users');
+require('./models/PasswordResetLinks');
 
 // Passport Config (must be below models)
 require('./config/passport/passport');

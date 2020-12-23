@@ -12,3 +12,5 @@ const LinksSchema = new Schema({
   },
   tokenExpires: Date
 });
+
+mongoose.model('Users', LinksSchema);

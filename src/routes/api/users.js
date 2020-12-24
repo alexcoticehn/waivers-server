@@ -4,7 +4,7 @@ const passport = require("../../middlewares/auth/passport/passport");
 const router = require("express").Router();
 const auth = require("../../middlewares/auth/auth");
 const Users = mongoose.model("Users");
-const passwordResetMiddleware = require('../../middlewares/users/passwordReset');
+const createPasswordResetLink = require('../../middlewares/auth/users/passwordReset');
 const status_codes = require("../status_codes");
 
 // POST login route (optional, everyone has access)
@@ -50,7 +50,8 @@ router.post("/login", (req, res, next) => {
   )(req, res, next);
 });
 
-router.post('/reset/send', (req, res, _next) => {
+// POST route to create and send password reset link
+router.post('/reset/send', (req, res) => {
   const {
     body: { user },
   } = req;
@@ -73,9 +74,11 @@ router.post('/reset/send', (req, res, _next) => {
         })
       }
 
-      passwordResetMiddleware.createPasswordResetLink(user._id)
+      createPasswordResetLink(user._id)
         .then(() => {
-          return res.status(status_codes.OK).json({});
+          return res.status(status_codes.OK).json({
+            message: "Password reset email created"
+          });
         }).catch();
     })
 })

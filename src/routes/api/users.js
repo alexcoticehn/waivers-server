@@ -51,7 +51,7 @@ router.post("/login", (req, res, next) => {
 });
 
 // POST route to create and send password reset link
-router.post('/reset/send', (req, res) => {
+router.put('/reset/send', (req, res) => {
   const {
     body: { user },
   } = req;

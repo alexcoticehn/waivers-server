@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 const LinksSchema = new Schema({
   token: String,
   tokenExpires: Date,
+  pending: Number,
   user_id: {
       type: Schema.Types.ObjectId,
       ref: 'Users'

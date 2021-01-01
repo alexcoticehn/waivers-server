@@ -9,7 +9,7 @@ const StatusPending = 1;
  * Generate password reset link entity and save to db
  * @param {ObjectId} userId 
  */
-module.exports = async function createOrUpdatePasswordResetLink(userId) {
+module.exports.createOrUpdatePasswordResetLink = async function(userId) {
     const resetLink = await findExistingPasswordResetLink(userId);
 
     if (resetLink) {
@@ -25,8 +25,6 @@ module.exports = async function createOrUpdatePasswordResetLink(userId) {
 
     PasswordResetLinks.create(newResetLink);
     }
-
-    // email user here
 }
 
 async function findExistingPasswordResetLink(userId) {

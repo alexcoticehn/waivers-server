@@ -2,7 +2,7 @@ const router = require("express").Router();
 const UsersController = require('../../controllers/UsersController');
 const Auth = require('../../middlewares/auth/auth');
 
-// POST login route (optional, everyone has access)
+// POST route to process login requests
 router.post("/login", UsersController.userLogin);
 
 // POST route to create and send password reset link

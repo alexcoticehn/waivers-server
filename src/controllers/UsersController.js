@@ -77,7 +77,7 @@ module.exports.sendResetEmail = function(req, res) {
                 .then(() => {
                     EmailMiddleware.sendEmail('no-reply@jailors.com', user.email, 'Password Reset Email', 'Email sent');
                     return res.status(StatusCodes.OK).json({
-                        message: "Password reset email created"
+                        message: "Password reset email sent"
                     });
                 })
         })

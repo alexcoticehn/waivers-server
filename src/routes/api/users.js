@@ -7,7 +7,7 @@ const createPasswordResetLink = require('../../middlewares/auth/users/passwordRe
 const status_codes = require("../statusCodes");
 
 // POST login route (optional, everyone has access)
-router.post("/login", UsersController.handleLoginRequest(req, res, next));
+router.post("/login", UsersController.userLoginPost);
 
 // POST route to create and send password reset link
 router.put('/reset/send', (req, res) => {

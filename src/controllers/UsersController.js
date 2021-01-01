@@ -1,6 +1,10 @@
 const Passport = require('../middlewares/auth/passport/passport');
 const StatusCodes = require('../routes/statusCodes');
-module.exports.handleLoginRequest = function(req, res, next) {
+
+/**
+ * Method to handle login requests
+ */
+module.exports.userLoginPost = function(req, res, next) {
     const {
         body: { user },
     } = req;

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const UsersController = require('../../controllers/UsersController');
+const Auth = require('../../middlewares/auth/auth');
 
 // POST login route (optional, everyone has access)
 router.post("/login", UsersController.userLogin);
@@ -8,7 +9,7 @@ router.post("/login", UsersController.userLogin);
 router.put('/reset/send', UsersController.sendResetEmail);
 
 // PATCH reset password route (required, only authenticated users have access)
-router.patch("/reset/password", auth.required, (req, res) => {
+router.patch("/reset/password", Auth.required, (req, res) => {
   const { body: { user } } = req;
 
   let new_password = user.new_password;

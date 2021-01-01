@@ -10,7 +10,7 @@ const StatusPending = 1;
  * @param {ObjectId} userId 
  */
 module.exports.createOrUpdatePasswordResetLink = async function(userId) {
-    const resetLink = await findExistingPasswordResetLink(userId);
+    let resetLink = await findExistingPasswordResetLink(userId);
 
     if (resetLink) {
         resetLink.tokenExpires = Date.now() + 3600000;
@@ -23,8 +23,10 @@ module.exports.createOrUpdatePasswordResetLink = async function(userId) {
             user_id: userId
         }
 
-    PasswordResetLinks.create(newResetLink);
+    resetLink = PasswordResetLinks.create(newResetLink);
     }
+
+    return resetLink;
 }
 
 async function findExistingPasswordResetLink(userId) {

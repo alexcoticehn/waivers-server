@@ -1,4 +1,3 @@
-/* global require */
 const mongoose = require('../../../config/mongoose/mongoose');
 const crypto = require('crypto');
 
@@ -6,7 +5,6 @@ const PasswordResetLinks = mongoose.model("PasswordResetLinks");
 
 const StatusPending = 1;
 
-/* global module */
 /**
  * Generate password reset link entity and save to db
  * @param {ObjectId} userId 

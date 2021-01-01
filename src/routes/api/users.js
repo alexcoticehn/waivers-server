@@ -1,54 +1,13 @@
-/* global require */
 const mongoose = require("../../config/mongoose/mongoose");
-const passport = require("../../middlewares/auth/passport/passport");
 const router = require("express").Router();
 const auth = require("../../middlewares/auth/auth");
+const UsersController = require('../../controllers/UsersController');
 const Users = mongoose.model("Users");
 const createPasswordResetLink = require('../../middlewares/auth/users/passwordReset');
-const status_codes = require("../status_codes");
+const status_codes = require("../statusCodes");
 
 // POST login route (optional, everyone has access)
-router.post("/login", (req, res, next) => {
-  const {
-    body: { user },
-  } = req;
-
-  if (!user.username) {
-    return res.status(status_codes.UNPROCESSABLE_ENTITY).json({
-      errors: {
-        username: "is required",
-      },
-    });
-  }
-
-  if (!user.password) {
-    return res.status(status_codes.UNPROCESSABLE_ENTITY).json({
-      errors: {
-        password: "is required",
-      },
-    });
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  return passport.authenticate('login', { session: false }, (err, passportUser, _info) => {
-      if (err) {
-        return next(err);
-      }
-
-      if (passportUser) {
-        const token = passportUser.generateJWT();
-
-        return res.json({ token });
-      }
-
-      if (_info.errors) {
-        return res.status(status_codes.UNAUTHORIZED).json({
-          errors: _info.errors
-        })
-      }
-    }
-  )(req, res, next);
-});
+router.post("/login", UsersController.handleLoginRequest(req, res, next));
 
 // POST route to create and send password reset link
 router.put('/reset/send', (req, res) => {
@@ -84,8 +43,7 @@ router.put('/reset/send', (req, res) => {
 })
 
 // PATCH reset password route (required, only authenticated users have access)
-// eslint-disable-next-line no-unused-vars
-router.patch("/reset/password", auth.required, (req, res, _next) => {
+router.patch("/reset/password", auth.required, (req, res) => {
   const { body: { user } } = req;
 
   let new_password = user.new_password;
@@ -117,5 +75,4 @@ router.patch("/reset/password", auth.required, (req, res, _next) => {
     })
 });
 
-// eslint-disable-next-line no-undef
 module.exports = router;

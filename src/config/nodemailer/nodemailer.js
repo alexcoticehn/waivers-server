@@ -6,9 +6,11 @@ const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         type: 'OAuth2',
-        user: process.env.JAILORS_EMAIL_API_ACCESS,
-        serviceClient: process.env.JAILORS_EMAIL_CLIENT_ID,
-        privateKey: process.env.JAILORS_EMAIL_CLIENT_KEY
+        user: process.env.JAILORS_EMAIL_ADDRESS,
+        clientId: process.env.JAILORS_EMAIL_CLIENT_ID,
+        clientSecret: process.env.JAILORS_EMAIL_CLIENT_SECRET,
+        accessToken: process.env.JAILORS_EMAIL_ACCESS_TOKEN,
+        refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN
     }
 });
 

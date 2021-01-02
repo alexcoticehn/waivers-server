@@ -1,7 +1,4 @@
 require('dotenv').config();
-// eslint-disable-next-line no-unused-vars
-const mongoose = require('./config/mongoose/mongoose');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -30,8 +27,7 @@ require('./config/passport/passport');
 app.use(require('./routes'));
 
 if (!isProduction) {
-    // eslint-disable-next-line no-unused-vars
-    app.use((err, req, res, _next) => {
+    app.use((err, req, res) => {
         res.status(err.status || 500);
 
         res.json({
@@ -43,8 +39,7 @@ if (!isProduction) {
     });
 }
 
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, _next) => {
+app.use((err, req, res) => {
     res.status(err.status || 500);
 
     res.json({

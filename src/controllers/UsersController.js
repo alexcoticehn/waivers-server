@@ -75,9 +75,11 @@ module.exports.sendResetEmail = function(req, res) {
 
             PasswordReset.createOrUpdatePasswordResetLink(user._id)
                 .then((resetLink) => {
-                    EmailMiddleware.sendEmail(user.email, 'Password Reset Email', resetLink.token);
-                    return res.status(StatusCodes.OK).json({
-                        message: "Password reset email sent"
+                    EmailMiddleware.sendEmail(user.email, 'Password Reset Email', resetLink.token)
+                        .then(() => {
+                            return res.status(StatusCodes.OK).json({
+                            message: "Password reset email sent"
+                        })
                     });
                 })
         })

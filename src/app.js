@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
-/*global require*/
+require('dotenv').config();
 // eslint-disable-next-line no-unused-vars
 const mongoose = require('./config/mongoose/mongoose');
 

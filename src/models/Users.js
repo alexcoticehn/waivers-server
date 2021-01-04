@@ -38,7 +38,7 @@ UsersSchema.methods.isValidPassword = async function(password) {
 
 /**
  * Generate and return json web token when user is logged in
- * JWT to be used to for future requests
+ * JWT to be used for future requests
  */
 UsersSchema.methods.generateJWT = function() {
     const today = new Date();

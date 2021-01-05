@@ -1,4 +1,4 @@
-const Passport = require('../middlewares/auth/passport/passportMiddleware');
+const Passport = require('../middlewares/auth/passport/PassportMiddleware');
 const StatusCodes = require('../routes/statusCodes');
 const PasswordReset = require('../middlewares/auth/users/PasswordResetMiddleware');
 const UsersMiddleware = require('../middlewares/users/UsersMiddleware');

@@ -3,6 +3,7 @@ const StatusCodes = require('../routes/statusCodes');
 const PasswordReset = require('../middlewares/auth/users/PasswordResetMiddleware');
 const UsersMiddleware = require('../middlewares/users/UsersMiddleware');
 const EmailMiddleware = require('../middlewares/email/EmailMiddleware');
+const LoginMiddleware = require('../middlewares/auth/users/LoginMiddleware');
 
 /**
  * Method to handle login requests
@@ -29,13 +30,13 @@ module.exports.userLogin = function(req, res, next) {
     }
 
   // eslint-disable-next-line no-unused-vars
-    return Passport.authenticate('login', { session: false }, (err, passportUser, _info) => {
+    return Passport.authenticate('login', { session: false }, async (err, user, _info) => {
         if (err) {
             return next(err);
         }
 
-        if (passportUser) {
-            const token = passportUser.generateJWT();
+        if (user) {
+            const token = await LoginMiddleware.generateJWT(user.username, user._id);
             return res.json({ token });
         }
 

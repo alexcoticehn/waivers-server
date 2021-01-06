@@ -17,6 +17,6 @@ const auth = {
         credentialsRequired: false
     })
 };
-*/
-// eslint-disable-next-line no-undef
+
 module.exports = auth;
+*/

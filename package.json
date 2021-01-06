@@ -4,7 +4,7 @@
   "description": "Server side code for SJ Waivers app",
   "main": "app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config=./src/config/jest/jest.config.js",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
     "start": "./node_modules/.bin/nodemon ./src/app.js",
     "create": "node ./src/bin/create_db.js"

@@ -7,7 +7,6 @@
     "test": "jest",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
     "start": "./node_modules/.bin/nodemon ./src/app.js",
-    "debug": "./node_modules/.bin/nodemon --inspect=8080 ./src/app.js",
     "create": "node ./src/bin/create_db.js"
   },
   "author": "Alex Cotic-Ehn",

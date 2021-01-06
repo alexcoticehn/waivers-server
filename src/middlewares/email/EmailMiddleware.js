@@ -1,4 +1,4 @@
-const nodemailer = require('../../config/nodemailer/nodemailer');
+const nodemailer = require('../../config/nodemailer/nodemailer.config');
 
 module.exports.sendEmail = async function(recipient, subject, body) {
     let transporter = nodemailer.transporter;

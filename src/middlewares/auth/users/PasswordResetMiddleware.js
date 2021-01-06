@@ -1,4 +1,4 @@
-const mongoose = require('../../../config/mongoose/mongoose');
+const mongoose = require('../../../config/mongoose/mongoose.config');
 const crypto = require('crypto');
 
 const PasswordResetLinks = mongoose.model("PasswordResetLinks");

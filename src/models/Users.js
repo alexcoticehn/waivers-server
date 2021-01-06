@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const SaltRounds = require("../config/passport/passport");
+const SaltRounds = require("../config/passport/passport.config");
 
 var Schema = mongoose.Schema;
 

@@ -20,9 +20,6 @@ if (!isProduction) {
 require('./models/Users');
 require('./models/PasswordResetLinks');
 
-// Passport Config (must be below models)
-require('./config/passport/passport');
-
 // Routes
 app.use(require('./routes'));
 

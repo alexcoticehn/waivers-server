@@ -4,7 +4,7 @@
   "description": "Server side code for SJ Waivers app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
     "start": "./node_modules/.bin/nodemon ./src/app.js",
     "debug": "./node_modules/.bin/nodemon --inspect=8080 ./src/app.js",

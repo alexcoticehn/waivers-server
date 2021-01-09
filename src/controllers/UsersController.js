@@ -1,9 +1,9 @@
-const Passport = require('../middlewares/auth/passport/PassportMiddleware');
+const PassportService = require('../services/auth/passport/PassportService');
 const StatusCodes = require('../routes/statusCodes');
-const PasswordReset = require('../middlewares/auth/users/PasswordResetMiddleware');
-const UsersMiddleware = require('../middlewares/users/UsersMiddleware');
-const EmailMiddleware = require('../middlewares/email/EmailMiddleware');
-const LoginMiddleware = require('../middlewares/auth/users/LoginMiddleware');
+const PasswordResetService = require('../services/auth/users/PasswordResetService');
+const UsersService = require('../services/users/UsersService');
+const EmailService = require('../services/email/EmailService');
+const LoginService = require('../services/auth/users/LoginService');
 
 /**
  * Method to handle login requests
@@ -30,13 +30,13 @@ module.exports.userLogin = function(req, res, next) {
     }
 
   // eslint-disable-next-line no-unused-vars
-    return Passport.authenticate('login', { session: false }, async (err, user, _info) => {
+    return PassportService.authenticate('login', { session: false }, async (err, user, _info) => {
         if (err) {
             return next(err);
         }
 
         if (user) {
-            const token = await LoginMiddleware.generateJWT(user.username, user._id);
+            const token = await LoginService.generateJWT(user.username, user._id);
             return res.json({ token });
         }
 
@@ -64,7 +64,7 @@ module.exports.sendResetEmail = function(req, res) {
         });
     }
 
-    UsersMiddleware.findUserByEmail(user.email)
+    UsersService.findUserByEmail(user.email)
         .then((user) => {
             if (!user) {
                 return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -74,9 +74,9 @@ module.exports.sendResetEmail = function(req, res) {
                 })
             }
 
-            PasswordReset.createOrUpdatePasswordResetLink(user._id)
+            PasswordResetService.createOrUpdatePasswordResetLink(user._id)
                 .then((resetLink) => {
-                    EmailMiddleware.sendEmail(user.email, 'Password Reset Email', resetLink.token)
+                    EmailService.sendEmail(user.email, 'Password Reset Email', resetLink.token)
                         .then(() => {
                             return res.status(StatusCodes.OK).json({
                                 message: "Password reset email sent"

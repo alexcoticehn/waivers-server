@@ -1,4 +1,7 @@
 module.exports = {
     testEnvironment: 'node',
-    rootDir: '../../tests'
+    rootDir: '../../tests',
+    setupFiles: [
+        '../config/jest/jest.setup.js'
+    ]
 };

@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const AuthService = require('../AuthService');
 
 /**
  * Generate and return JWT upon successful authentication to be used for subsequent requests
@@ -14,5 +15,5 @@ module.exports.generateJWT = async function(username, id) {
         username: username,
         id: id,
         exp: parseInt(expirationDate.getTime() / 1000, 10)
-    }, process.env.JWT_SECRET);
+    }, AuthService.getJWTSecret());
 }

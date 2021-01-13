@@ -1,4 +1,4 @@
-const mongoose = require('../../../config/mongoose/mongoose.config');
+const mongoose = require('../../config/mongoose/mongoose.config');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 

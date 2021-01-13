@@ -36,7 +36,7 @@ module.exports.userLogin = function(req, res, next) {
         }
 
         if (user) {
-            const token = await AuthService.generateJWT(user.username, user._id);
+            const token = AuthService.generateJWT(user.username, user._id);
             res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure`);
             return res.json();
         }

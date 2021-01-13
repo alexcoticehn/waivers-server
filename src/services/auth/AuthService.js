@@ -13,15 +13,15 @@ function getJWTSecret() {
  * @param {string} username 
  * @param {ObjectId} id 
  */
-module.exports.generateJWT = async function(username, id) {
-    return await jwt.sign({
+module.exports.generateJWT = function(username, id) {
+    return jwt.sign({
         username: username,
         id: id,
         expiresIn: '1 week'
     }, getJWTSecret());
 }
 
-module.exports.decodeJWT = async function(token) {
+module.exports.decodeJWT = function(token) {
     return jwt.verify(token, getJWTSecret());      
 }
 

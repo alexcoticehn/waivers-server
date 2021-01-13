@@ -1,9 +1,9 @@
 const PassportService = require('../services/auth/passport/PassportService');
 const StatusCodes = require('../routes/statusCodes');
-const PasswordResetService = require('../services/auth/users/PasswordResetService');
+const PasswordResetService = require('../services/auth/PasswordResetService');
 const UsersService = require('../services/users/UsersService');
 const EmailService = require('../services/email/EmailService');
-const LoginService = require('../services/auth/users/LoginService');
+const AuthService = require('../services/auth/AuthService');
 
 /**
  * Method to handle login requests
@@ -36,7 +36,7 @@ module.exports.userLogin = function(req, res, next) {
         }
 
         if (user) {
-            const token = await LoginService.generateJWT(user.username, user._id);
+            const token = await AuthService.generateJWT(user.username, user._id);
             res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure`);
             return res.json();
         }

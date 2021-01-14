@@ -17,12 +17,16 @@ module.exports.generateJWT = function(username, id) {
     return jwt.sign({
         username: username,
         id: id,
-        expiresIn: '1 week'
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
     }, getJWTSecret());
 }
 
 module.exports.decodeJWT = function(token) {
-    return jwt.verify(token, getJWTSecret());      
+    try {
+        return jwt.verify(token, getJWTSecret());
+    } catch (err) {
+        return false;
+    }  
 }
 
 /*

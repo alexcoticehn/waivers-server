@@ -21,6 +21,10 @@ module.exports.generateJWT = function(username, id) {
     }, getJWTSecret());
 }
 
+/**
+ * Decode given jwt. Returns decoded token if token is valid and false if token is invalid.
+ * @param {string} token 
+ */
 module.exports.decodeJWT = function(token) {
     try {
         return jwt.verify(token, getJWTSecret());

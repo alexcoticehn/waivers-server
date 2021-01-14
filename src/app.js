@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const errorHandler = require('errorhandler');
+const cookieParser = require('cookie-parser');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -11,6 +12,7 @@ const app = express();
 app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 if (!isProduction) {
   app.use(errorHandler());

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --config=./src/config/jest/jest.config.js",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
-    "start": "./node_modules/.bin/nodemon ./src/app.js",
+    "start": "./node_modules/.bin/nodemon ./src/server.js",
     "create": "node ./src/bin/create_db.js"
   },
   "author": "Alex Cotic-Ehn",

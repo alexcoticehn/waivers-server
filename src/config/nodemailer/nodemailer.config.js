@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 
-// Your access token may expire in 200 days which would be sometime in mid-July
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,

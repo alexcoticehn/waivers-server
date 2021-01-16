@@ -84,7 +84,7 @@ module.exports.sendResetEmail = function(req, res) {
                             })
                         })
                         .catch(() => {
-                            return res.status(500).json({
+                            return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
                                 errors: {
                                     message: "An error occurred, please try again"
                                 }

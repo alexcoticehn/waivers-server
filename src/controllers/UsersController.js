@@ -82,7 +82,21 @@ module.exports.sendResetEmail = function(req, res) {
                             return res.status(StatusCodes.OK).json({
                                 message: "Password reset email sent"
                             })
+                        })
+                        .catch(() => {
+                            return res.status(500).json({
+                                errors: {
+                                    message: "An error occurred, please try again"
+                                }
+                            })
                         });
+                })
+                .catch(() => {
+                    return res.status(StatusCodes.UNAUTHORIZED).json({
+                        errors: {
+                            message: "An error occurred, please try again"
+                        }
+                    })
                 })
         })
 }

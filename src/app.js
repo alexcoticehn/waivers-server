@@ -28,7 +28,8 @@ require('./models/Users');
 require('./models/PasswordResetLinks');
 
 // Routes
-app.use(require('./routes'));
+const routes = require('./routes')
+app.use('/api', routes);
 
 if (!isProduction) {
     app.use((err, req, res) => {

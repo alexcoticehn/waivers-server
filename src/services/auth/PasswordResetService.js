@@ -1,4 +1,4 @@
-const mongoose = require('../../config/mongoose/mongoose.config');
+const mongoose = require('mongoose');
 const crypto = require('crypto');
 
 const PasswordResetLinks = mongoose.model("PasswordResetLinks");
@@ -14,7 +14,7 @@ module.exports.createOrUpdatePasswordResetLink = async function(userId) {
 
     if (resetLink) {
         resetLink.tokenExpires = Date.now() + 3600000;
-        resetLink.save();
+        resetLink = await resetLink.save();
     } else {
         const newResetLink = {
             token: crypto.randomBytes(20).toString('hex'),

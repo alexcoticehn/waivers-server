@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const UsersController = require('../../controllers/UsersController');
+const RequestService = require('../../services/request/RequestService');
 
 // POST route to process login requests
-router.post("/login", UsersController.userLogin);
+router.post("/login", RequestService.verifyLoginRequest, UsersController.userLogin);
 
 // POST route to create and send password reset link
 router.put('/reset/send', UsersController.sendResetEmail);

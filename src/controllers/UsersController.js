@@ -9,27 +9,6 @@ const AuthService = require('../services/auth/AuthService');
  * Method to handle login requests
  */
 module.exports.userLogin = function(req, res, next) {
-    const {
-        body: { user },
-    } = req;
-
-    if (!user.username) {
-        return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-            errors: {
-                username: "is required",
-            },
-        });
-    }
-
-    if (!user.password) {
-        return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-        errors: {
-            password: "is required",
-        },
-        });
-    }
-
-  // eslint-disable-next-line no-unused-vars
     return PassportService.authenticate('login', { session: false }, async (err, user, _info) => {
         if (err) {
             return next(err);

@@ -2,6 +2,7 @@ const app = require('../../app');
 const supertest = require("supertest");
 const request = supertest(app)
 const mongoose = require('mongoose');
+const StatusCodes = require('../../routes/statusCodes');
 
 beforeAll(() => {
     mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -21,7 +22,7 @@ describe('Login Tests', () => {
                 }
             })
             .then((res) => {
-                expect(res.status).toBe(200);
+                expect(res.status).toBe(StatusCodes.OK);
             });
     })
 
@@ -34,7 +35,7 @@ describe('Login Tests', () => {
                 }
             })
             .then((res) => {
-                expect(res.status).toBe(401);
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
             });
     })
 
@@ -47,7 +48,18 @@ describe('Login Tests', () => {
                 }
             })
             .then((res) => {
-                expect(res.status).toBe(401);
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            });
+    })
+
+    test('Unsuccessful Login - Bad Request Format', async () => {
+        return request.post('/api/users/login')
+            .send({
+                username: 'bad_username',
+                password: '435345' 
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.BAD_REQUEST);
             });
     })
 });

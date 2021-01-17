@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const isProduction = process.env.NODE_ENV === 'production';
+const isTest = process.env.NODE_ENV === 'test';
 
 const app = express();
 
@@ -20,8 +21,11 @@ if (!isProduction) {
 }
 
 // configure mongoose
-mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.set('debug', true);
+if (!isTest && !isProduction) {
+    // For dev environment
+    mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.set('debug', true);
+}
 
 // Models
 require('./models/Users');

@@ -7,8 +7,8 @@ if (process.env.NODE_ENV === 'test') {
         host: 'smtp.ethereal.email',
         port: 587,
         auth: {
-            user: 'cordie.wiegand43@ethereal.email',
-            pass: 'XsqYEsDzZHbFv9ecCY'
+            user: process.env.JAILORS_TEST_EMAIL_ADDRESS,
+            pass: process.env.JAILORS_TEST_EMAIL_PASSWORD
         }   
     });
 } else {

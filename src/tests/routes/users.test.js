@@ -52,7 +52,7 @@ describe('Login Tests', () => {
             });
     })
 
-    test('Unsuccessful Login - Bad Request Format', async () => {
+    test('Unsuccessful Login - Bad Request Format No User Object', async () => {
         return request.post('/api/users/login')
             .send({
                 username: 'bad_username',
@@ -62,4 +62,76 @@ describe('Login Tests', () => {
                 expect(res.status).toBe(StatusCodes.BAD_REQUEST);
             });
     })
+
+    test('Unsuccessful Login - Bad Request Format No Username', async () => {
+        return request.post('/api/users/login')
+            .send({
+                user: {
+                    password: '123456789'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+            })
+    })
+
+    test('Unsuccessful Login - Bad Request Format No Password', async () => {
+        return request.post('/api/users/login')
+            .send({
+                user: {
+                    username: 'alexcoticehn'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+            })
+    })
 });
+
+describe('Password Reset Tests', () => {
+    test('Successful Password Reset', async () => {
+        return request.put('/api/users/reset/send')
+            .send({
+                user: {
+                    email: 'alcabc7@hotmail.com'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+            })
+    })
+
+    test('Unsuccessful Password Reset - Bad Request No User Object', async () => {
+        return request.put('/api/users/reset/send')
+            .send({
+                email: 'alcabc7@hotmail.com'
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+            })
+    })
+
+    test('Unsuccessful Password Reset - Bad Request No Email Object', async () => {
+        return request.put('/api/users/reset/send')
+            .send({
+                user: {
+                    user: 'alcabc7@hotmail.com'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+            })
+    })
+
+    test('Unsuccessful Password Reset - Unauthorized Nonexistent Email', async () => {
+        return request.put('/api/users/reset/send')
+            .send({
+                user: {
+                    email: 'alhhhhh@hotmail.com'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
+})

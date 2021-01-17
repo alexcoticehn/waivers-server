@@ -6,7 +6,7 @@ const RequestService = require('../../services/request/RequestService');
 router.post("/login", RequestService.verifyLoginRequest, UsersController.userLogin);
 
 // POST route to create and send password reset link
-router.put('/reset/send', UsersController.sendResetEmail);
+router.put('/reset/send', RequestService.verifyPasswordResetRequest, UsersController.sendResetEmail);
 
 // PATCH reset password route (required, only authenticated users have access) commented out for now
 /*

@@ -6,3 +6,10 @@ module.exports.verifyLoginRequest = function(req, res, next) {
     }
     next();
 }
+
+module.exports.verifyPasswordResetRequest = function(req, res, next) {
+    if (!req.body.user || !req.body.user.email) {
+        return res.status(statusCodes.BAD_REQUEST).json({});
+    }
+    next()
+}

@@ -36,14 +36,6 @@ module.exports.sendResetEmail = function(req, res) {
         body: { user },
     } = req;
 
-    if (!user.email) {
-        return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
-        errors: {
-            email: "is required",
-        },
-        });
-    }
-
     UsersService.findUserByEmail(user.email)
         .then((user) => {
             if (!user) {

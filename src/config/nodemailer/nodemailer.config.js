@@ -10,7 +10,10 @@ const transporter = nodemailer.createTransport({
         clientId: process.env.JAILORS_EMAIL_CLIENT_ID,
         clientSecret: process.env.JAILORS_EMAIL_CLIENT_SECRET,
         accessToken: process.env.JAILORS_EMAIL_ACCESS_TOKEN,
-        refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN
+        refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN,
+        tls: {
+            rejectUnauthorized: false
+        }
     }
 });
 

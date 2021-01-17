@@ -1,15 +1,33 @@
-const request = require("supertest");
 const app = require('../../app');
+const supertest = require("supertest");
+const request = supertest(app)
 
 describe('Login Tests', () => {
-    test('Successful Login Test', () => {
-        return request(app)
-            .post('/api/users/login', {
-                username: 'dfilipovic',
-                password: '123456789'
+    test('Successful Login Test', async () => {
+        return request
+            .post('/api/users/login')
+            .send({
+                "user": {
+                    "username": 'dfilipovic',
+                    "password": '123456789'
+                }
             })
             .then((res) => {
-                console.log(res.status);
+                expect(res.status).toBe(200);
+            });
+    })
+
+    test('Unsuccessful Login Test', async () => {
+        return request
+            .post('/api/users/login')
+            .send({
+                "user": {
+                    "username": 'dfilipovic',
+                    "password": '435345'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(401);
             });
     })
 });

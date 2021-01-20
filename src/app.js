@@ -35,6 +35,18 @@ require('./models/PasswordResetLinks');
 const routes = require('./routes')
 app.use('/api', routes);
 
+app.use((err, req, res) => {
+    res.status(err.status || 500);
+
+    res.json({
+        errors: {
+            message: err.message,
+            error: {},
+        },
+    });
+});
+
+
 if (!isProduction) {
     app.use((err, req, res) => {
         res.status(err.status || 500);
@@ -47,16 +59,5 @@ if (!isProduction) {
         });
     });
 }
-
-app.use((err, req, res) => {
-    res.status(err.status || 500);
-
-    res.json({
-        errors: {
-            message: err.message,
-            error: {},
-        },
-    });
-});
 
 module.exports = app;

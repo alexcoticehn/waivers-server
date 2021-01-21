@@ -1,4 +1,4 @@
-const statusCodes = require("../routes/statusCodes");
+const StatusCodes = require("../constants/StatusCodes");
 
 /**
  * Verifies that a login request is sent in the correct format
@@ -8,7 +8,7 @@ const statusCodes = require("../routes/statusCodes");
  */
 module.exports.verifyLoginRequest = function(req, res, next) {
     if (!req.body.user || !req.body.user.username || !req.body.user.password) {
-        return res.status(statusCodes.BAD_REQUEST).json({});
+        return res.status(StatusCodes.BAD_REQUEST).json({});
     }
     next();
 }
@@ -21,7 +21,7 @@ module.exports.verifyLoginRequest = function(req, res, next) {
  */
 module.exports.verifyPasswordResetRequest = function(req, res, next) {
     if (!req.body.user || !req.body.user.email) {
-        return res.status(statusCodes.BAD_REQUEST).json({});
+        return res.status(StatusCodes.BAD_REQUEST).json({});
     }
     next()
 }

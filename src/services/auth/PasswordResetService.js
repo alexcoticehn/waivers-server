@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
+const PasswordResetConstants = require('../../constants/PasswordResetLinks');
 
 const PasswordResetLinks = mongoose.model("PasswordResetLinks");
-
-const StatusPending = 1;
 
 /**
  * Generate password reset link entity and save to db
@@ -19,7 +18,7 @@ module.exports.createOrUpdatePasswordResetLink = async function(userId) {
         const newResetLink = {
             token: crypto.randomBytes(20).toString('hex'),
             tokenExpires: Date.now() + 3600000,
-            pending: StatusPending,
+            pending: PasswordResetConstants.StatusPending,
             user_id: userId
         }
 

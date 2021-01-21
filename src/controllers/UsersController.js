@@ -1,5 +1,5 @@
 const PassportService = require('../services/auth/PassportService');
-const StatusCodes = require('../routes/statusCodes');
+const StatusCodes = require('../constants/StatusCodes');
 const PasswordResetService = require('../services/auth/PasswordResetService');
 const UsersService = require('../services/users/UsersService');
 const EmailService = require('../services/email/EmailService');

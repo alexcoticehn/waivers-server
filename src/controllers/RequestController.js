@@ -1,4 +1,4 @@
-const statusCodes = require("../../routes/statusCodes");
+const statusCodes = require("../routes/statusCodes");
 
 /**
  * Verifies that a login request is sent in the correct format

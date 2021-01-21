@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const UsersController = require('../../controllers/UsersController');
-const RequestService = require('../../services/request/RequestService');
+const RequestController = require('../../controllers/RequestController');
 
 // POST route to process login requests
-router.post("/login", RequestService.verifyLoginRequest, UsersController.userLogin);
+router.post("/login", RequestController.verifyLoginRequest, UsersController.userLogin);
 
 // POST route to create and send password reset link
-router.put('/reset/send', RequestService.verifyPasswordResetRequest, UsersController.sendResetEmail);
+router.put('/reset/send', RequestController.verifyPasswordResetRequest, UsersController.sendResetEmail);
 
 // PATCH reset password route (required, only authenticated users have access) commented out for now
 /*

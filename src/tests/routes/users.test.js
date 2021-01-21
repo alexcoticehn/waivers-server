@@ -2,14 +2,14 @@ const app = require('../../app');
 const supertest = require("supertest");
 const request = supertest(app)
 const mongoose = require('mongoose');
-const StatusCodes = require('../../routes/statusCodes');
+const StatusCodes = require('../../constants/StatusCodes');
 
-beforeAll(() => {
-    mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
+beforeAll(async () => {
+    await mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
 })
 
-afterAll(() => {
-    mongoose.disconnect();
+afterAll(async () => {
+    await mongoose.disconnect();
 })
 
 describe('Login Tests', () => {

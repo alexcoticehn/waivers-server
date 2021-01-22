@@ -1,43 +1,37 @@
-/*global require*/
-/*global process*/
-require('../config/mongoose/mongoose');
+require('dotenv').config();
 require('../models/Users');
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const SaltRounds = require('../config/passport/passport');
+const Passport = require('../constants/Passport');
 const UsersModel = mongoose.model('Users');
 
-function clearUsers() {
-    UsersModel.deleteMany()
-    .catch((err) => {
-        console.log(err);
-        process.exit();
-    })
-    .then(() => {});
+async function connectDB() {
+    await mongoose.connect(process.env.DB_HOST_DEV + 'waivers_users_test', { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
-function createUsers(users_to_create) {
-    UsersModel.insertMany(users_to_create)
-    .then(() => {
-        process.exit();
-    })
-    .catch((err) => {
-        console.log(err);
-        process.exit();
-    });
+async function disconnectDB() {
+    await mongoose.disconnect();
+}
+
+async function clearUsers() {
+    await UsersModel.deleteMany();
+}
+
+async function createUsers(users_to_create) {
+    await UsersModel.insertMany(users_to_create);
 }
 
 async function runScript() {
-    
-    clearUsers();
+    await connectDB();
+    await clearUsers();
 
     const Dimitri = {
         username: "dfilipovic",
         firstname: "Dimitri",
         lastname: "Filipovic",
         email: "dimitri.filipovic@gmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Harrison = {
@@ -45,7 +39,7 @@ async function runScript() {
         firstname: "Harrison",
         lastname: "Brown",
         email: "c.harrison.brown@gmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Alex = {
@@ -53,7 +47,7 @@ async function runScript() {
         firstname: "Alex",
         lastname: "Cotic-Ehn",
         email: "alcabc7@hotmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Chris = {
@@ -61,7 +55,7 @@ async function runScript() {
         firstname: "Chris",
         lastname: "Littomericzky",
         email: "chris_litto@hotmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Eric = {
@@ -69,7 +63,7 @@ async function runScript() {
         firstname: "Eric",
         lastname: "Wallin",
         email: "ericaxelwallin@gmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Ian = {
@@ -77,7 +71,7 @@ async function runScript() {
         firstname: "Ian",
         lastname: "Carter",
         email: "ian.carter@live.ca",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Stefan = {
@@ -85,7 +79,7 @@ async function runScript() {
         firstname: "Stefan",
         lastname: "Kalaba",
         email: "stefan.kalaba@hotmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Jimmy = {
@@ -93,7 +87,7 @@ async function runScript() {
         firstname: "Jimmy",
         lastname: "Ghuman",
         email: "jimmyghuman@hotmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Nathan = {
@@ -101,7 +95,7 @@ async function runScript() {
         firstname: "Nathan",
         lastname: "Alvarez",
         email: "nla86@hotmail.ca",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const Peter = {
@@ -109,12 +103,14 @@ async function runScript() {
         firstname: "Peter",
         lastname: "Bohdal",
         email: "peterbohdal@gmail.com",
-        password: await bcrypt.hash("123456789", SaltRounds)
+        password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 
     const users_to_create = [Dimitri, Harrison, Alex, Chris, Stefan, Eric, Ian, Peter, Jimmy, Nathan];
 
-    createUsers(users_to_create);
+    await createUsers(users_to_create);
+    await disconnectDB();
+    process.exit();
 }
 
 runScript();

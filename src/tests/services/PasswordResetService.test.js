@@ -22,4 +22,12 @@ describe('Password Reset Link Generation Tests', () => {
         expect(links.length).toBe(1);
         expect(resetLink.token).toBe(links[0].token);
     })
+
+    test('Password Reset Link - Create Additional', async () => {
+        await PasswordResetLinks.deleteMany({});
+        const user_id = new ObjectId(crypto.randomBytes(12).toString('hex'));
+        const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user_id);
+        const secondLink = await PasswordResetService.createOrUpdatePasswordResetLink(user_id);
+        expect(resetLink.token).toBe(secondLink.token);
+    })
 })

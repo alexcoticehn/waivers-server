@@ -7,7 +7,7 @@ const { ObjectId } = require('mongodb');
 const PasswordResetLinks = mongoose.model("PasswordResetLinks");
 
 beforeAll(async () => {
-    await mongoose.connect(process.env.DB_HOST_DEV + 'password_reset_test', { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.DB_HOST_DEV + 'waivers_password_reset_test', { useNewUrlParser: true, useUnifiedTopology: true });
 })
 
 afterAll(async () => {

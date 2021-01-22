@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const StatusCodes = require('../../constants/StatusCodes');
 
 beforeAll(async () => {
-    await mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.DB_HOST_DEV + 'waivers_users_test', { useNewUrlParser: true, useUnifiedTopology: true });
 })
 
 afterAll(async () => {

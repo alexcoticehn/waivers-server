@@ -1,4 +1,5 @@
-require('../../app');
+require('dotenv').config();
+require('../../models/PasswordResetLinks');
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const PasswordResetService = require('../../services/auth/PasswordResetService');

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const Passport = require("../constants/Passport");
 
 var Schema = mongoose.Schema;
 
@@ -11,16 +10,6 @@ const UsersSchema = new Schema({
   lastname: String,
   email: String,
   password: String
-});
-
-/**
- * Prior to saving user, hash password
- */
-UsersSchema.pre('save', async function(next) {
-    const hash = await bcrypt.hash(this.password, Passport.SaltRounds);
-
-    this.password = hash;
-    next();
 });
 
 /**

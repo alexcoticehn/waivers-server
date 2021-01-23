@@ -32,7 +32,7 @@ module.exports.verifyPasswordResetRequest = function(req, res, next) {
  * @param {*} res 
  * @param {*} next 
  */
-module.exports.verifyPasswordResetLink = function(req, res, next) {
+module.exports.verifyPasswordResetTokenRequest = function(req, res, next) {
     if (!req.body.token) {
         return res.status(StatusCodes.BAD_REQUEST).json({});
     }

@@ -3,6 +3,8 @@ const supertest = require("supertest");
 const request = supertest(app)
 const mongoose = require('mongoose');
 const StatusCodes = require('../../constants/StatusCodes');
+const PasswordResetService = require('../../services/auth/PasswordResetService');
+const UsersService = require('../../services/users/UsersService');
 
 beforeAll(async () => {
     await mongoose.connect(process.env.DB_HOST_DEV + 'waivers_users_test', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -79,7 +81,7 @@ describe('Login Tests', () => {
         return request.post('/api/users/login')
             .send({
                 user: {
-                    username: 'alexcoticehn'
+                    username: 'acoticehn'
                 }
             })
             .then((res) => {
@@ -132,6 +134,20 @@ describe('Request Password Reset Link Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
+})
+
+describe('Verify Password Reset Link Tests', () => {
+    test('Valid Password Reset Link', async () => {
+        const user = await UsersService.findUserByUsername('acoticehn');
+        const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
+        return request.get('/api/users/reset/verify')
+            .send({
+                token: resetLink.token
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
             })
     })
 })

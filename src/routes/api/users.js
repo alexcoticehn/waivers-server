@@ -8,6 +8,9 @@ router.post("/login", RequestController.verifyLoginRequest, UsersController.user
 // POST route to create and send password reset link
 router.put('/reset/send', RequestController.verifyPasswordResetRequest, UsersController.sendResetEmail);
 
+// GET route to check validity of password reset token
+router.get("/reset/verify", RequestController.verifyPasswordResetTokenRequest, UsersController.verifyResetTokenValid);
+
 // PATCH reset password route (required, only authenticated users have access) commented out for now
 /*
 router.patch("/reset/password", Auth.required, (req, res) => {

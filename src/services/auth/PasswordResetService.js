@@ -42,7 +42,7 @@ async function findExistingPasswordResetLink(userId) {
  */
 module.exports.getUserIdFromPasswordResetToken = async function(token) {
     const resetLink = await findPasswordResetLinkFromToken(token);
-    if (!isPasswordResetLinkValid(resetLink)) {
+    if (this.isPasswordResetLinkValid(resetLink)) {
         return false;
     }
     return resetLink.user_id;
@@ -52,7 +52,7 @@ module.exports.getUserIdFromPasswordResetToken = async function(token) {
  * Verifies PasswordResetLink object is still valid (pending and time not expired)
  * @param {PasswordResetLink} resetLink 
  */
-function isPasswordResetLinkValid(resetLink) {
+module.exports.isPasswordResetLinkValid = function(resetLink) {
     if (resetLink) {
         return (resetLink.tokenExpires > Date.now() && resetLink.pending);
     }

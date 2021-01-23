@@ -25,3 +25,16 @@ module.exports.verifyPasswordResetRequest = function(req, res, next) {
     }
     next()
 }
+
+/**
+ * Verifies that the password reset token check request is sent in the correct format
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+module.exports.verifyPasswordResetLink = function(req, res, next) {
+    if (!req.body.token) {
+        return res.status(StatusCodes.BAD_REQUEST).json({});
+    }
+    next();
+}

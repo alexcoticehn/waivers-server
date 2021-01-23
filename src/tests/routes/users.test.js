@@ -88,7 +88,7 @@ describe('Login Tests', () => {
     })
 });
 
-describe('Password Reset Tests', () => {
+describe('Request Password Reset Link Tests', () => {
     test('Successful Password Reset', async () => {
         return request.put('/api/users/reset/send')
             .send({

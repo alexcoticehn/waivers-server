@@ -71,3 +71,52 @@ module.exports.sendResetEmail = function(req, res) {
                 })
         })
 }
+
+/**
+ * Method to handle password reset token validity request
+ */
+module.exports.verifyResetTokenValid = function(req, res) {
+    const {
+        body: { token },
+    } = req;
+
+    PasswordResetService.getUserIdFromPasswordResetToken(token)
+        .then((userId) => {
+            if (!userId) {
+                return res.status(StatusCodes.UNAUTHORIZED).json({
+                    errors: {
+                        message: "This link is no longer valid. Please request a new one."
+                    }
+                })
+            }
+            UsersService.findUserById(userId)
+                .then((user) => {
+                    if (!user) {
+                        return res.status(StatusCodes.UNAUTHORIZED).json({
+                            errors: {
+                                message: "An error occurred, please try again"
+                            }
+                        })
+                    }
+                    return res.status(StatusCodes.OK).json({
+                        firstname: user.firstname,
+                        id: user._id,
+                        token: token
+                    })
+                })
+                .catch(() => {
+                    return res.status(StatusCodes.UNAUTHORIZED).json({
+                        errors: {
+                            message: "An error occurred, please try again"
+                        }
+                    })
+                })
+        })
+        .catch(() => {
+            return res.status(StatusCodes.UNAUTHORIZED).json({
+                errors: {
+                    message: "An error occurred, please try again"
+                }
+            })
+        })
+}

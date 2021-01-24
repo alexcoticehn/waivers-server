@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const PasswordResetConstants = require('../../constants/PasswordResetLinks');
+const PasswordResetConstants = require('../../constants/PasswordResetConstants');
 const PasswordResetLinks = mongoose.model('PasswordResetLinks');
 
 /**

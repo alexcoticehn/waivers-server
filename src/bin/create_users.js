@@ -3,7 +3,7 @@ require('../models/Users');
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const Passport = require('../constants/Passport');
+const Passport = require('../constants/PassportConstants');
 const UsersModel = mongoose.model('Users');
 
 async function connectDB() {

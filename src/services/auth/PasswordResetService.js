@@ -43,7 +43,7 @@ async function findExistingPasswordResetLink(userId) {
 module.exports.getUserIdFromPasswordResetToken = async function(token) {
     const resetLink = await findPasswordResetLinkFromToken(token);
     if (resetLink) {
-        if (!this.isPasswordResetLinkValid(resetLink.tokenExpires.getUTCMilliseconds(), resetLink.pending)) {
+        if (!this.isPasswordResetLinkValid(resetLink.tokenExpires.getTime(), resetLink.pending)) {
             return false;
         }
     }

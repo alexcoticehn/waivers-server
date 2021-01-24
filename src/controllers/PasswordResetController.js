@@ -75,7 +75,7 @@ module.exports.verifyResetTokenValid = function(req, res) {
                     }
                     return res.status(StatusCodes.OK).json({
                         firstname: user.firstname,
-                        id: user._id,
+                        id: user.id,
                         token: token
                     })
                 })

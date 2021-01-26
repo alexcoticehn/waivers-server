@@ -2,6 +2,7 @@ const StatusCodes = require('../constants/StatusCodes');
 const PasswordResetService = require('../services/auth/PasswordResetService');
 const UsersService = require('../services/users/UsersService');
 const EmailService = require('../services/email/EmailService');
+const AuthService = require('../services/auth/AuthService');
 
 /**
  * Method to handle password reset requests
@@ -85,6 +86,53 @@ module.exports.verifyResetTokenValid = function(req, res) {
                             message: "An error occurred, please try again"
                         }
                     })
+                })
+        })
+        .catch(() => {
+            return res.status(StatusCodes.UNAUTHORIZED).json({
+                errors: {
+                    message: "An error occurred, please try again"
+                }
+            })
+        })
+}
+
+module.exports.resetPasswordConfirm = function(req, res) {
+    const {
+        body: { token, password, id },
+    } = req;
+
+    PasswordResetService.getUserIdFromPasswordResetToken(token)
+        .then((userId) => {
+            if (!userId || userId.id != id) {
+                return res.status(StatusCodes.UNAUTHORIZED).json({
+                    errors: {
+                        message: "An error occurred, please try again"
+                    }
+                })
+            }
+            UsersService.findUserById(userId)
+                .then((user) => {
+                    if (!user) {
+                        return res.status(StatusCodes.UNAUTHORIZED).json({
+                            errors: {
+                                message: "An error occurred, please try again"
+                            }
+                        })
+                    }
+                    UsersService.saveUserPassword(user, password)
+                        .then((success) => {
+                            if (!success) {
+                                return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
+                                    errors: {
+                                        message: "An error occurred, please try again"
+                                    }
+                                })
+                            }
+                            const responseToken = AuthService.generateJWT(user.username, user._id);
+                            res.setHeader('Set-Cookie', `token=${responseToken}; HttpOnly; Secure`);
+                            return res.json();
+                        })
                 })
         })
         .catch(() => {

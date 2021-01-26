@@ -6,6 +6,7 @@ module.exports.getTransporter = function() {
         transporter = nodemailer.createTransport({
             host: 'smtp.ethereal.email',
             port: 587,
+            secure: false,
             auth: {
                 user: process.env.JAILORS_TEST_EMAIL_ADDRESS,
                 pass: process.env.JAILORS_TEST_EMAIL_PASSWORD
@@ -23,6 +24,9 @@ module.exports.getTransporter = function() {
                 clientSecret: process.env.JAILORS_EMAIL_CLIENT_SECRET,
                 accessToken: process.env.JAILORS_EMAIL_ACCESS_TOKEN,
                 refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         });
     }

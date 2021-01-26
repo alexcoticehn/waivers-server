@@ -97,6 +97,9 @@ module.exports.verifyResetTokenValid = function(req, res) {
         })
 }
 
+/**
+ * Method to handle actual password reset requests (final step in password reset process)
+ */
 module.exports.resetPasswordConfirm = function(req, res) {
     const {
         body: { token, password, id },

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const PassportConstants = require('../constants/PassportConstants');
 
 var Schema = mongoose.Schema;
 
@@ -20,6 +21,16 @@ UsersSchema.methods.isValidPassword = async function(password) {
     const compare = await bcrypt.compare(password, this.password);
 
     return compare;
+}
+
+/**
+ * Save user's new password
+ * @param {String} password 
+ */
+UsersSchema.methods.saveNewPassword = async function(password) {
+    this.password = await bcrypt.hash(password, PassportConstants.SaltRounds);
+    const saved_doc = await this.save();
+    return this === saved_doc;
 }
 
 mongoose.model('Users', UsersSchema);

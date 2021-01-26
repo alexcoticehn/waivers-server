@@ -24,3 +24,12 @@ module.exports.findUserByUsername = async function(username) {
 module.exports.findUserById = async function(userId) {
     return await Users.findById(userId);
 }
+
+/**
+ * Save user's new password, return true on success, false otherwise
+ * @param {Users} user 
+ * @param {String} new_password 
+ */
+module.exports.saveUserPassword = async function(user, new_password) {
+    return await user.saveUserPassword(new_password);
+}

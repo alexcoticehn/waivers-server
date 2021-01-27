@@ -102,12 +102,12 @@ module.exports.verifyResetTokenValid = function(req, res) {
  */
 module.exports.resetPasswordConfirm = function(req, res) {
     const {
-        body: { request_data },
+        body: { token, password, id },
     } = req;
 
-    PasswordResetService.getUserIdFromPasswordResetToken(request_data.token)
+    PasswordResetService.getUserIdFromPasswordResetToken(token)
         .then((userId) => {
-            if (!userId || userId.id != request_data.id) {
+            if (!userId || userId.toString() != id) {
                 return res.status(StatusCodes.UNAUTHORIZED).json({
                     errors: {
                         message: "An error occurred, please try again"
@@ -123,7 +123,7 @@ module.exports.resetPasswordConfirm = function(req, res) {
                             }
                         })
                     }
-                    UsersService.saveUserPassword(user, request_data.password)
+                    UsersService.saveUserPassword(user, password)
                         .then((success) => {
                             if (!success) {
                                 return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({

@@ -31,5 +31,5 @@ module.exports.findUserById = async function(userId) {
  * @param {String} new_password 
  */
 module.exports.saveUserPassword = async function(user, new_password) {
-    return await user.saveUserPassword(new_password);
+    return await user.saveNewPassword(new_password);
 }

@@ -1,6 +1,6 @@
 const app = require('../../app');
 const supertest = require("supertest");
-const request = supertest(app)
+const request = supertest(app);
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 const StatusCodes = require('../../constants/StatusCodes');
@@ -247,6 +247,26 @@ describe('Verify Password Reset Link Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+            })
+    })
+})
+
+describe('Confirm Password Reset Tests', () => {
+    test('Successful Password Reset Change', async () => {
+        let user = await UsersService.findUserByUsername('acoticehn');
+        const test_password = crypto.randomBytes(5).toString('hex');
+        expect(await user.isValidPassword(test_password)).toBe(false);
+        const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
+        return request.patch('/api/users/reset/confirm')
+            .send({
+                id: user.id,
+                password: test_password,
+                token: resetLink.token
+            })
+            .then(async (res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+                user = await UsersService.findUserByUsername('acoticehn');
+                expect(await user.isValidPassword(test_password)).toBe(true);
             })
     })
 })

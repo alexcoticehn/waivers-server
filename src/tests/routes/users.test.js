@@ -269,4 +269,42 @@ describe('Confirm Password Reset Tests', () => {
                 expect(await user.isValidPassword(test_password)).toBe(true);
             })
     })
+
+    test('Unsuccessful Password Reset Change - Missing parameter', async () => {
+        return request.patch('/api/users/reset/confirm')
+            .send({
+                password: 'test_password',
+                token: 'djgfg848473tgfg'
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.BAD_REQUEST);
+            })
+    })
+
+    test('Unsuccessful Password Reset Change - Bad Token', async () => {
+        let user = await UsersService.findUserByUsername('acoticehn');
+        return request.patch('/api/users/reset/confirm')
+            .send({
+                id: user.id,
+                password: 'test_password',
+                token: 'djgfg848473tgfg'
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
+
+    test('Unsuccessful Password Reset Change - Good Token, Bad UserID', async () => {
+        let user = await UsersService.findUserByUsername('acoticehn');
+        const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
+        return request.patch('/api/users/reset/confirm')
+            .send({
+                id: '45t5gtg66',
+                password: 'test_password',
+                token: resetLink.token
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
 })

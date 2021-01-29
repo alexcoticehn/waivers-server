@@ -37,7 +37,7 @@ async function findExistingPasswordResetLink(userId) {
 }
 
 /**
- * 
+ * Find User attached to password reset token and return if token is still valid
  * @param {String} token 
  */
 module.exports.getUserIdFromPasswordResetToken = async function(token) {

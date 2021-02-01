@@ -213,7 +213,7 @@ describe('Verify Password Reset Link Tests', () => {
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
                 expect(res.body.errors.message).toBe(
-                    'An error occurred, please try again'
+                    'This link is no longer valid. Please request a new one.'
                 );
             })
     })

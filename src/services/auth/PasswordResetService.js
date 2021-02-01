@@ -37,17 +37,12 @@ async function findExistingPasswordResetLink(userId) {
 }
 
 /**
- * Find User attached to password reset token and return if token is still valid
+ * Find User attached to password reset token and return it
  * @param {String} token 
  */
-module.exports.getUserIdFromPasswordResetToken = async function(token) {
+module.exports.getPasswordResetLinkFromToken = async function(token) {
     const resetLink = await findPasswordResetLinkFromToken(token);
-    if (resetLink) {
-        if (!this.isPasswordResetLinkValid(resetLink.tokenExpires.getTime(), resetLink.pending)) {
-            return false;
-        }
-    }
-    return resetLink.user_id;
+    return resetLink;
 }
 
 /**

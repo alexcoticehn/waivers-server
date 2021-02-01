@@ -56,16 +56,24 @@ module.exports.verifyResetTokenValid = function(req, res) {
         body: { token },
     } = req;
 
-    PasswordResetService.getUserIdFromPasswordResetToken(token)
-        .then((userId) => {
-            if (!userId) {
+    PasswordResetService.getPasswordResetLinkFromToken(token)
+        .then((resetLink) => {
+            if (!resetLink) {
                 return res.status(StatusCodes.UNAUTHORIZED).json({
                     errors: {
                         message: "This link is no longer valid. Please request a new one."
                     }
                 })
             }
-            UsersService.findUserById(userId)
+            const token_valid = PasswordResetService.isPasswordResetLinkValid(resetLink.tokenExpires.getTime(), resetLink.pending);
+            if (!token_valid) {
+                return res.status(StatusCodes.UNAUTHORIZED).json({
+                    errors: {
+                        message: "This link is no longer valid. Please request a new one."
+                    } 
+                })
+            }
+            UsersService.findUserById(resetLink.user_id)
                 .then((user) => {
                     if (!user) {
                         return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -105,16 +113,31 @@ module.exports.resetPasswordConfirm = function(req, res) {
         body: { token, password, id },
     } = req;
 
-    PasswordResetService.getUserIdFromPasswordResetToken(token)
-        .then((userId) => {
-            if (!userId || userId.toString() != id) {
+    PasswordResetService.getPasswordResetLinkFromToken(token)
+        .then((resetLink) => {
+            if (!resetLink) {
                 return res.status(StatusCodes.UNAUTHORIZED).json({
                     errors: {
                         message: "An error occurred, please try again"
                     }
                 })
             }
-            UsersService.findUserById(userId)
+            const token_valid = PasswordResetService.isPasswordResetLinkValid(resetLink.tokenExpires.getTime(), resetLink.pending);
+            if (!token_valid) {
+                return res.status(StatusCodes.UNAUTHORIZED).json({
+                    errors: {
+                        message: "This link is no longer valid. Please request a new one."
+                    } 
+                })
+            }
+            if (resetLink.user_id.toString() != id) {
+                return res.status(StatusCodes.UNAUTHORIZED).json({
+                    errors: {
+                        message: "An error occurred, please try again"
+                    }
+                })
+            }
+            UsersService.findUserById(resetLink.user_id)
                 .then((user) => {
                     if (!user) {
                         return res.status(StatusCodes.UNAUTHORIZED).json({
@@ -137,12 +160,5 @@ module.exports.resetPasswordConfirm = function(req, res) {
                             return res.json();
                         })
                 })
-        })
-        .catch(() => {
-            return res.status(StatusCodes.UNAUTHORIZED).json({
-                errors: {
-                    message: "An error occurred, please try again"
-                }
-            })
         })
 }

@@ -33,7 +33,7 @@ module.exports.sendResetEmail = function(req, res) {
                         .catch(() => {
                             return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({
                                 errors: {
-                                    message: "An error occurred, please try again"
+                                    message: "An error occurred, please try again. If the error persists, please contact your side administrator."
                                 }
                             })
                         });

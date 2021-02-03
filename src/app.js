@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isTest = process.env.NODE_ENV === 'test';
+// const isTest = process.env.NODE_ENV === 'test';
 const isDev = process.env.NODE_ENV === 'development'
 
 const app = express();

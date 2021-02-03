@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isTest = process.env.NODE_ENV === 'test';
+const isDev = process.env.NODE_ENV === 'development'
 
 const app = express();
 
@@ -21,7 +22,7 @@ if (!isProduction) {
 }
 
 // configure mongoose
-if (!isTest && !isProduction) {
+if (isDev) {
     // For dev environment
     mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
     mongoose.set('debug', true);

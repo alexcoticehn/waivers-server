@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const errorHandler = require('errorhandler');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 
@@ -16,10 +15,6 @@ app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
-if (!isProduction) {
-  app.use(errorHandler());
-}
 
 // configure mongoose
 if (isDev) {
@@ -36,26 +31,30 @@ require('./models/PasswordResetLinks');
 const routes = require('./routes')
 app.use('/api', routes);
 
-app.use((err, req, res) => {
-    res.status(err.status || 500);
+app.all('/api/*', (req, res, next) => {
+    const error = new Error('This URL does not exist on the server');
+    error.status = 404;
 
-    res.json({
-        errors: {
-            message: err.message,
-            error: {},
-        },
-    });
-});
-
+    next(error);
+})
 
 if (!isProduction) {
-    app.use((err, req, res) => {
+    app.use((err, req, res, _next) => {
+        res.status(err.status || 500).json({
+            errors: {
+                message: err.message,
+                error: err,
+            },
+        });
+    });
+} else {
+    app.use((err, req, res, _next) => {
         res.status(err.status || 500);
 
         res.json({
             errors: {
                 message: err.message,
-                error: err,
+                error: {},
             },
         });
     });

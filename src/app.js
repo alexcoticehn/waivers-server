@@ -43,7 +43,7 @@ if (!isProduction) {
         res.status(err.status || 500).json({
             errors: {
                 message: err.message,
-                error: err,
+                stack_trace: err.stack,
             },
         });
     });
@@ -53,8 +53,7 @@ if (!isProduction) {
 
         res.json({
             errors: {
-                message: err.message,
-                error: {},
+                message: err.message
             },
         });
     });

@@ -1,3 +1,5 @@
+'use strict';
+
 class JailorsError extends Error {
     constructor(message, statusCode) {
         super(message);
@@ -5,4 +7,8 @@ class JailorsError extends Error {
         this.status = statusCode;
         Error.captureStackTrace(this, this.constructor);
     }
+}
+
+module.exports = {
+    JailorsError
 }

@@ -9,8 +9,7 @@ const {JailorsError} = require('../errors/JailorsError');
  */
 module.exports.verifyLoginRequest = function(req, res, next) {
     if (!req.body.user || !req.body.user.username || !req.body.user.password) {
-        const error = new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
-        next(error);
+        throw new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
     }
     next();
 }
@@ -23,8 +22,7 @@ module.exports.verifyLoginRequest = function(req, res, next) {
  */
 module.exports.verifyPasswordResetRequest = function(req, res, next) {
     if (!req.body.user || !req.body.user.email) {
-        const error = new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
-        next(error);
+        throw new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
     }
     next()
 }
@@ -37,8 +35,7 @@ module.exports.verifyPasswordResetRequest = function(req, res, next) {
  */
 module.exports.verifyPasswordResetTokenRequest = function(req, res, next) {
     if (!req.body.token) {
-        const error = new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
-        next(error);
+        throw new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
     }
     next();
 }
@@ -51,8 +48,7 @@ module.exports.verifyPasswordResetTokenRequest = function(req, res, next) {
  */
 module.exports.verifyPasswordResetConfirmationRequest = function(req, res, next) {
     if (!req.body.token || !req.body.password || !req.body.id) {
-        const error = new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
-        next(error);
+        throw new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
     }
     next();
 }

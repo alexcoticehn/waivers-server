@@ -25,9 +25,7 @@ module.exports.getTransporter = function() {
                 clientId: process.env.JAILORS_EMAIL_CLIENT_ID,
                 clientSecret: process.env.JAILORS_EMAIL_CLIENT_SECRET,
                 accessToken: process.env.JAILORS_EMAIL_ACCESS_TOKEN,
-                refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN,
-                accessUrl: 'https://accounts.google.com/o/oauth2/v2/auth'
-                // can also use this endpoint? https://accounts.google.com/o/oauth2/v2/auth
+                refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN
             }
         });
     }

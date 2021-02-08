@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
 
 const isProduction = process.env.NODE_ENV === 'production';
 // const isTest = process.env.NODE_ENV === 'test';
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(helmet());
 
 // configure mongoose
 if (isDev) {

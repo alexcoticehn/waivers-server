@@ -75,10 +75,10 @@ async function runScript() {
     };
 
     const Stefan = {
-        username: "skalaba",
-        firstname: "Stefan",
-        lastname: "Kalaba",
-        email: "stefan.kalaba@hotmail.com",
+        username: "mwinter",
+        firstname: "Michael",
+        lastname: "Winter",
+        email: "mikezima16@gmail.com",
         password: await bcrypt.hash("123456789", Passport.SaltRounds)
     };
 

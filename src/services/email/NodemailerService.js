@@ -24,7 +24,7 @@ module.exports.getTransporter = function() {
                 user: process.env.JAILORS_EMAIL_ADDRESS,
                 clientId: process.env.JAILORS_EMAIL_CLIENT_ID,
                 clientSecret: process.env.JAILORS_EMAIL_CLIENT_SECRET,
-                accessToken: process.env.JAILORS_EMAIL_ACCESS_TOKEN,
+                // had accessToken here before, see if this works better?
                 refreshToken: process.env.JAILORS_EMAIL_REFRESH_TOKEN
             }
         });

@@ -1,8 +1,8 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
-//const ExtractJWT = require('passport-jwt').ExtractJwt;
 const UsersService = require('../users/UsersService');
+const AuthService = require('../auth/AuthService');
 
 /**
  * Local strategy used for basic login
@@ -31,10 +31,11 @@ passport.use('login', new LocalStrategy({
 /**
  * JWT strategy for requests made to endpoints where authorization is required
  */
-/*
-passport.use('verify_jwt', new JWTStrategy({
-
+passport.use(new JWTStrategy({
+    jwtFromRequest: AuthService.getJWTFromRequestCookie,
+    secretOrKey: process.env.NODE_ENV === 'test' ? process.env.JWT_TEST_SECRET : process.env.JWT_SECRET
+}, (jwt_payload, done) => {
+    done(null, jwt_payload.id);
 }))
-*/
 
 module.exports = passport;

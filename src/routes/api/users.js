@@ -67,6 +67,9 @@ router.get("/reset/verify", RequestController.verifyPasswordResetTokenRequest, P
  */
 router.patch("/reset/confirm", RequestController.verifyPasswordResetConfirmationRequest, PasswordResetController.resetPasswordConfirm);
 
-router.get("/players", UsersController.verifyJWT);
+/**
+ * GET route to verify if a user's token is still valid
+ */
+router.get("/token/verify", UsersController.verifyJWT);
 
 module.exports = router;

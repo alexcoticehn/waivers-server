@@ -28,7 +28,12 @@ module.exports.userLogin = function(req, res, next) {
 /**
  * Method to verify supplied JWT
  */
-module.exports.verifyJWT = function(req, res, _next) {
-    // TODO: Implement
-    return res.status(200).json();
+module.exports.verifyJWT = function(req, res, next) {
+    return PassportService.authenticate('jwt', { session: false }, (err, userId) => {
+        if (userId) {
+            next();
+        } else {
+            next(new JailorsError("Sesson expired. Please login again", StatusCodes.UNAUTHORIZED));
+        }
+    })(req, res, next);
 }

@@ -9,17 +9,17 @@ passport.use('login', new LocalStrategy({
     UsersService.findUserByUsername(username)
         .then(async (user) => {
             if (!user) {
-                return done(null, false, { errors: {'username or password': 'is invalid'}});
+                return done("Username or password is incorrect", false);
             }
 
             const valid_password = await user.isValidPassword(password);
             if (!valid_password) {
-                return done(null, false, { errors: {'username or password': 'is invalid'}});
+                return done("Username or password is incorrect", false);
             }
             return done(null, user);
         })
-        .catch((err) => {
-            return done(err);
+        .catch(() => {
+            return done("An error occurred, please try again.", false);
         });
 }));
 

@@ -1,26 +1,21 @@
 const PassportService = require('../services/auth/PassportService');
 const StatusCodes = require('../constants/StatusCodes');
 const AuthService = require('../services/auth/AuthService');
+const { JailorsError } = require('../errors/JailorsError');
 
 /**
  * Method to handle login requests
  */
 module.exports.userLogin = function(req, res, next) {
-    return PassportService.authenticate('login', { session: false }, async (err, user, _info) => {
+    return PassportService.authenticate('login', { session: false }, (err, user) => {
         if (err) {
-            return next(err);
+            next(new JailorsError(err, StatusCodes.UNAUTHORIZED));
         }
 
         if (user) {
             const token = AuthService.generateJWT(user.username, user._id);
             res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure`);
             return res.json();
-        }
-
-        if (_info.errors) {
-            return res.status(StatusCodes.UNAUTHORIZED).json({
-                errors: _info.errors
-            })
-        }
+        }        
     })(req, res, next);
 }

@@ -1,4 +1,3 @@
-const nodemailer = require('./NodemailerService');
 const sendGrid = require('@sendgrid/mail');
 
 module.exports.sendEmail = async function(recipient, subject, body) {
@@ -14,13 +13,7 @@ module.exports.sendEmail = async function(recipient, subject, body) {
 
         info = await sendGrid.send(message);
     } else {
-        let transporter = nodemailer.getTransporter();
-        info = await transporter.sendMail({
-            from: `Sailor Jerry's League Office <${process.env.JAILORS_EMAIL_ADDRESS}>`,
-            to: recipient,
-            subject: subject,
-            text: body
-        })
+        info = Promise.resolve();
     }
     return info;
 }

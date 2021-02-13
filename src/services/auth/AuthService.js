@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const PassportConstants = require('../../constants/PassportConstants');
 
 function getJWTSecret() {
     if (process.env.NODE_ENV == 'test') {
@@ -34,25 +35,14 @@ module.exports.decodeJWT = function(token) {
     }  
 }
 
-/*
-const getTokenFromHeaders = (req) => {
-    const { headers: { authorization }} = req;
-
-    return authorization;
-};
-
-const auth = {
-    required: jwt({
-        secret: 'secret',
-        userProperty: 'payload',
-        getToken: getTokenFromHeaders
-    }),
-    optional: jwt({
-        secret: 'secret',
-        userProperty: 'payload',
-        credentialsRequired: false
-    })
-};
-
-module.exports = auth;
-*/
+/**
+ * Get JWT From cookies for authorization check
+ * @param {*} req 
+ */
+module.exports.getJWTFromRequestCookie = function(req) {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies[PassportConstants.TokenCookie]
+    }
+    return token;
+}

@@ -67,4 +67,6 @@ router.get("/reset/verify", RequestController.verifyPasswordResetTokenRequest, P
  */
 router.patch("/reset/confirm", RequestController.verifyPasswordResetConfirmationRequest, PasswordResetController.resetPasswordConfirm);
 
+router.get("/players", UsersController.verifyJWT);
+
 module.exports = router;

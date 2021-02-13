@@ -19,3 +19,10 @@ module.exports.userLogin = function(req, res, next) {
         }        
     })(req, res, next);
 }
+
+/**
+ * Method to verify supplied JWT
+ */
+module.exports.verifyJWT = function(req, res, _next) {
+    return res.status(200).json();
+}

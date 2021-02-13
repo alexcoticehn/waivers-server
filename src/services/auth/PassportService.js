@@ -1,5 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const JWTStrategy = require('passport-jwt').Strategy;
+//const ExtractJWT = require('passport-jwt').ExtractJwt;
 const UsersService = require('../users/UsersService');
 
 passport.use('login', new LocalStrategy({
@@ -22,5 +24,9 @@ passport.use('login', new LocalStrategy({
             return done("An error occurred, please try again.", false);
         });
 }));
+
+passport.use('verify_jwt', new JWTStrategy({
+
+}))
 
 module.exports = passport;

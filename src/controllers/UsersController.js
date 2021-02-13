@@ -14,7 +14,11 @@ module.exports.userLogin = function(req, res, next) {
 
         if (user) {
             const token = AuthService.generateJWT(user.username, user._id);
-            res.setHeader('Set-Cookie', `token=${token}; HttpOnly; Secure`);
+            if (process.env.NODE_ENV === 'production') {
+                res.setHeader('Set-Cookie', `jailors_token=${token}; HttpOnly; Secure`);
+            } else {
+                res.setHeader('Set-Cookie', `jailors_token=${token}; HttpOnly`);
+            }
             return res.json();
         }        
     })(req, res, next);
@@ -24,5 +28,6 @@ module.exports.userLogin = function(req, res, next) {
  * Method to verify supplied JWT
  */
 module.exports.verifyJWT = function(req, res, _next) {
+    // TODO: Implement
     return res.status(200).json();
 }

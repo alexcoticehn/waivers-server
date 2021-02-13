@@ -4,6 +4,9 @@ const JWTStrategy = require('passport-jwt').Strategy;
 //const ExtractJWT = require('passport-jwt').ExtractJwt;
 const UsersService = require('../users/UsersService');
 
+/**
+ * Local strategy used for basic login
+ */
 passport.use('login', new LocalStrategy({
     usernameField: 'user[username]',
     passwordField: 'user[password]',
@@ -25,8 +28,13 @@ passport.use('login', new LocalStrategy({
         });
 }));
 
+/**
+ * JWT strategy for requests made to endpoints where authorization is required
+ */
+/*
 passport.use('verify_jwt', new JWTStrategy({
 
 }))
+*/
 
 module.exports = passport;

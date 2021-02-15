@@ -1,12 +1,12 @@
-const app = require('../../app');
+const app = require('../../../app');
 const supertest = require("supertest");
 const request = supertest(app);
 const mongoose = require('mongoose');
 const crypto = require('crypto');
-const StatusCodes = require('../../constants/StatusCodes');
-const PasswordResetService = require('../../services/auth/PasswordResetService');
-const UsersService = require('../../services/users/UsersService');
-const PasswordResetConstants = require('../../constants/PasswordResetConstants');
+const StatusCodes = require('../../../constants/StatusCodes');
+const PasswordResetService = require('../../../services/auth/PasswordResetService');
+const UsersService = require('../../../services/users/UsersService');
+const PasswordResetConstants = require('../../../constants/PasswordResetConstants');
 const { ObjectId } = require('mongodb');
 const PasswordResetLinks = mongoose.model('PasswordResetLinks');
 

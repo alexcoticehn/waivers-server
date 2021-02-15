@@ -7,7 +7,7 @@ const Passport = require('../constants/PassportConstants');
 const UsersModel = mongoose.model('Users');
 
 async function connectDB() {
-    await mongoose.connect(process.env.DB_HOST_DEV + 'waivers_users_test', { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.DB_HOST_DEV + 'jailors_password_reset_test', { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 async function disconnectDB() {

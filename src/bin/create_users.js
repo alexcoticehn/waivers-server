@@ -1,13 +1,13 @@
 require('dotenv').config();
 require('../models/Users');
-
+const argv = require('minimist')(process.argv.slice(2));
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const Passport = require('../constants/PassportConstants');
 const UsersModel = mongoose.model('Users');
 
 async function connectDB() {
-    await mongoose.connect(process.env.DB_HOST_DEV + 'jailors_password_reset_test', { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.DB_HOST_DEV + argv.db, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 async function disconnectDB() {

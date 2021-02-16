@@ -1,3 +1,6 @@
+/**
+ * To use this script, run "npm run create -- --db=<local_db_name>" from the root (server) directory
+ */
 require('dotenv').config();
 require('../models/Users');
 const argv = require('minimist')(process.argv.slice(2));

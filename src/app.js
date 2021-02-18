@@ -7,10 +7,6 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const compression = require('compression');
 
-const isProduction = process.env.NODE_ENV === 'production';
-// const isTest = process.env.NODE_ENV === 'test';
-const isDev = process.env.NODE_ENV === 'development'
-
 const app = express();
 
 app.use(cors());
@@ -19,6 +15,10 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());
 app.use(compression());
+
+const isProduction = process.env.NODE_ENV === 'production';
+// const isTest = process.env.NODE_ENV === 'test';
+const isDev = app.get('env') === 'development';
 
 // configure mongoose
 if (isDev) {

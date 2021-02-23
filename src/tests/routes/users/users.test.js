@@ -130,4 +130,12 @@ describe('JWT Verification Tests', () => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
             })
     })
+
+    test('Invalid Token Test - Missing Cookie', () => {
+        return request.get('/api/users/token/verify')
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
 })

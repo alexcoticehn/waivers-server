@@ -3,6 +3,10 @@ const supertest = require("supertest");
 const request = supertest(app);
 const mongoose = require('mongoose');
 const StatusCodes = require('../../../constants/StatusCodes');
+const AuthService = require('../../../services/auth/AuthService');
+const jwt = require('jsonwebtoken');
+const PassportConstants = require('../../../constants/PassportConstants');
+const crypto = require('crypto');
 
 beforeAll(async () => {
     await mongoose.connect(process.env.DB_HOST_DEV + 'jailors_users_test', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -87,3 +91,43 @@ describe('Login Tests', () => {
             })
     })
 });
+
+describe('JWT Verification Tests', () => {
+    test('Valid Token Test', () => {
+        const token = AuthService.generateJWT('alex', crypto.randomBytes(24).toString('hex'));
+        return request.get('/api/users/token/verify')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+            })
+    })
+
+    test('Invalid Token Test - Expired', () => {
+        const token = jwt.sign({
+            exp: Math.floor(Date.now() / 1000) - (60 * 60),
+            id: crypto.randomBytes(24).toString('hex'),
+            username: 'alex'
+        }, process.env.JWT_TEST_SECRET);
+        return request.get('/api/users/token/verify')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
+
+    test('Invalid Token Test - Bad Secret', () => {
+        const token = jwt.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            id: crypto.randomBytes(24).toString('hex'),
+            username: 'alex'
+        }, "BAD_SECRET");
+        return request.get('/api/users/token/verify')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
+            })
+    })
+})

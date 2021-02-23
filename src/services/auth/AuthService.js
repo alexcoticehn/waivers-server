@@ -23,19 +23,6 @@ module.exports.generateJWT = function(username, id) {
 }
 
 /**
- * Decode given jwt. Returns decoded token if token is valid and false if token is invalid.
- * Currently only used for testing purposes, maybe move from this class?
- * @param {string} token 
- */
-module.exports.decodeJWT = function(token) {
-    try {
-        return jwt.verify(token, getJWTSecret());
-    } catch (err) {
-        return false;
-    }  
-}
-
-/**
  * Get JWT From cookies for authorization check
  * @param {*} req 
  */

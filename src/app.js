@@ -8,7 +8,11 @@ const compression = require('compression');
 
 const app = express();
 
-app.use(cors());
+const corsConfig = {
+    origin: 'http://192.168.1.66:8080/'
+}
+
+app.use(cors(corsConfig));
 app.use(require('morgan')('dev'));
 app.use(express.json());
 app.use(cookieParser());

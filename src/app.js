@@ -9,7 +9,8 @@ const compression = require('compression');
 const app = express();
 
 const corsConfig = {
-    origin: 'http://192.168.1.66:8080/'
+    origin: 'http://localhost:8080',
+    credentials: true
 }
 
 app.use(cors(corsConfig));

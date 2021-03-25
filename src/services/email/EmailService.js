@@ -21,8 +21,8 @@ module.exports.sendEmail = async function(recipient, subject, body) {
 /**
  * Returns body of the password reset email to be sent with url to follow
  */
-module.exports.getResetPasswordEmailBody = function(hostname, token) {
+module.exports.getResetPasswordEmailBody = function(referer, token) {
     return "A password reset has been triggered on the account associated with this email. Please follow the link below.\n" +
         "The link is valid for 60 minutes from the time of request. Once this link expires, you will have to request a new reset link. \n\n" +
-        hostname + '/reset/' + token;
+        referer + 'reset/' + token;
 }

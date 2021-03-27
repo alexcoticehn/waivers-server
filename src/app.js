@@ -47,7 +47,6 @@ require('./models/PasswordResetLinks');
 
 // Routes
 const routes = require('./routes');
-const { JailorsError } = require('./errors/JailorsError');
 app.use('/api', routes);
 
 app.all('/api/*', (req, res, next) => {

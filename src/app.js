@@ -8,8 +8,20 @@ const compression = require('compression');
 
 const app = express();
 
+const isProduction = process.env.NODE_ENV === 'production';
+// const isTest = process.env.NODE_ENV === 'test';
+const isDev = process.env.NODE_ENV === 'development';
+
+const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com/']
+
 const corsConfig = {
-    origin: 'http://localhost:8080',
+    origin: function(origin, callback) {
+        if (corsWhitelist.indexOf(origin) !== -1 || !isProduction) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }
 
@@ -19,10 +31,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 app.use(compression());
-
-const isProduction = process.env.NODE_ENV === 'production';
-// const isTest = process.env.NODE_ENV === 'test';
-const isDev = app.get('env') === 'development';
 
 // configure mongoose
 if (isDev) {
@@ -38,7 +46,8 @@ require('./models/Users');
 require('./models/PasswordResetLinks');
 
 // Routes
-const routes = require('./routes')
+const routes = require('./routes');
+const { JailorsError } = require('./errors/JailorsError');
 app.use('/api', routes);
 
 app.all('/api/*', (req, res, next) => {

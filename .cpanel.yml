@@ -1,0 +1,7 @@
+
+deployment:
+  tasks:
+    - source /home/jailccxn/nodevenv/repos/jailors/server/14/bin/activate
+    - cd /home/jailccxn/repos/jailors/server
+    - npm install --production
+    - npm start

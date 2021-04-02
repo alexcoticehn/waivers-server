@@ -1,0 +1,15 @@
+{
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-jailors-production-182926-authRole",
+      "UnauthRoleArn": "arn:aws:iam::461852405049:role/amplify-jailors-production-182926-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::461852405049:role/amplify-jailors-production-182926-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-jailors-production-182926-deployment",
+      "UnauthRoleName": "amplify-jailors-production-182926-unauthRole",
+      "StackName": "amplify-jailors-production-182926",
+      "StackId": "arn:aws:cloudformation:us-east-2:461852405049:stack/amplify-jailors-production-182926/5b1d65b0-93e1-11eb-a2a7-02c076950c7c",
+      "AmplifyAppId": "d2np6ogyacfunk"
+    }
+  }
+}

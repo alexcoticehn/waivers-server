@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest --config=./src/config/jest/jest.config.js",
     "lint": "./node_modules/.bin/eslint ./src/*.js",
-    "start": "node ./server.js",
-    "dev": "nodemon -r dotenv/config ./server.js",
+    "start": "node ./src/server.js",
+    "dev": "nodemon -r dotenv/config ./src/server.js",
     "create": "node ./src/bin/create_users.js"
   },
   "author": "Alex Cotic-Ehn",

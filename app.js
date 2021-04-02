@@ -42,11 +42,11 @@ if (isDev) {
 }
 
 // Models
-require('./models/Users');
-require('./models/PasswordResetLinks');
+require('./src/models/Users');
+require('./src/models/PasswordResetLinks');
 
 // Routes
-const routes = require('./routes');
+const routes = require('./src/routes');
 app.use('/api', routes);
 
 app.all('/api/*', (req, res, next) => {

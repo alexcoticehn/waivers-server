@@ -33,7 +33,7 @@ module.exports.verifyJWT = function(req, res, next) {
         if (userId) {
             next();
         } else {
-            next(new JailorsError("Sesson expired. Please login again", StatusCodes.UNAUTHORIZED));
+            next(new JailorsError("Session expired. Please login again", StatusCodes.UNAUTHORIZED));
         }
     })(req, res, next);
 }

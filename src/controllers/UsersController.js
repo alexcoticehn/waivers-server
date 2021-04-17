@@ -16,7 +16,7 @@ module.exports.userLogin = function(req, res, next) {
         if (user) {
             const token = AuthService.generateJWT(user.username, user._id);
             if (process.env.NODE_ENV === 'production') {
-                res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; Secure`);
+                res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; Secure; SameSite=None`);
             } else {
                 res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly`);
             }

@@ -1,7 +1,7 @@
 const PassportService = require('../services/auth/PassportService');
+const { JailorsError } = require('../errors/JailorsError');
 const StatusCodes = require('../constants/StatusCodes');
 const AuthService = require('../services/auth/AuthService');
-const { JailorsError } = require('../errors/JailorsError');
 const PassportConstants = require('../constants/PassportConstants');
 
 /**

@@ -95,7 +95,7 @@ describe('Login Tests', () => {
 describe('JWT Verification Tests', () => {
     test('Valid Token Test', () => {
         const token = AuthService.generateJWT('alex', crypto.randomBytes(24).toString('hex'));
-        return request.get('/api/users/token/verify')
+        return request.get('/api/auth/token/verify')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
             .send({})
             .then((res) => {
@@ -109,7 +109,7 @@ describe('JWT Verification Tests', () => {
             id: crypto.randomBytes(24).toString('hex'),
             username: 'alex'
         }, process.env.JWT_TEST_SECRET);
-        return request.get('/api/users/token/verify')
+        return request.get('/api/auth/token/verify')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
             .send({})
             .then((res) => {
@@ -123,7 +123,7 @@ describe('JWT Verification Tests', () => {
             id: crypto.randomBytes(24).toString('hex'),
             username: 'alex'
         }, "BAD_SECRET");
-        return request.get('/api/users/token/verify')
+        return request.get('/api/auth/token/verify')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
             .send({})
             .then((res) => {
@@ -132,7 +132,7 @@ describe('JWT Verification Tests', () => {
     })
 
     test('Invalid Token Test - Missing Cookie', () => {
-        return request.get('/api/users/token/verify')
+        return request.get('/api/auth/token/verify')
             .send({})
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);

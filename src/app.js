@@ -48,9 +48,9 @@ require('./models/PasswordResetLinks');
 
 // Routes
 const routes = require('./routes');
-app.use('/api', routes);
+app.use('/jailors/api', routes);
 
-app.all('/api/*', (req, res, next) => {
+app.all('/jailors/api/*', (req, res, next) => {
     const error = new Error('This URL does not exist on the server');
     error.status = 404;
 

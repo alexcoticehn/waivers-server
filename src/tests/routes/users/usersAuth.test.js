@@ -18,7 +18,7 @@ afterAll(async () => {
 
 describe('Login Tests', () => {
     test('Successful Login Test', async () => {
-        return request.post('/api/users/login')
+        return request.post('/jailors/api/users/login')
             .send({
                 user: {
                     username: 'dfilipovic',
@@ -31,7 +31,7 @@ describe('Login Tests', () => {
     })
 
     test('Unsuccessful Login Test - Incorrect Password', async () => {
-        return request.post('/api/users/login')
+        return request.post('/jailors/api/users/login')
             .send({
                 user: {
                     username: 'dfilipovic',
@@ -44,7 +44,7 @@ describe('Login Tests', () => {
     })
 
     test('Unsuccessful Login Test - Incorrect Username', async () => {
-        return request.post('/api/users/login')
+        return request.post('/jailors/api/users/login')
             .send({
                 user: {
                     username: 'bad_username',
@@ -57,7 +57,7 @@ describe('Login Tests', () => {
     })
 
     test('Unsuccessful Login - Bad Request Format No User Object', async () => {
-        return request.post('/api/users/login')
+        return request.post('/jailors/api/users/login')
             .send({
                 username: 'bad_username',
                 password: '435345' 
@@ -68,7 +68,7 @@ describe('Login Tests', () => {
     })
 
     test('Unsuccessful Login - Bad Request Format No Username', async () => {
-        return request.post('/api/users/login')
+        return request.post('/jailors/api/users/login')
             .send({
                 user: {
                     password: '123456789'
@@ -80,7 +80,7 @@ describe('Login Tests', () => {
     })
 
     test('Unsuccessful Login - Bad Request Format No Password', async () => {
-        return request.post('/api/users/login')
+        return request.post('/jailors/api/users/login')
             .send({
                 user: {
                     username: 'acoticehn'
@@ -95,7 +95,7 @@ describe('Login Tests', () => {
 describe('JWT Verification Tests', () => {
     test('Valid Token Test', () => {
         const token = AuthService.generateJWT('alex', crypto.randomBytes(24).toString('hex'));
-        return request.get('/api/auth/token/verify')
+        return request.get('/jailors/api/auth/token/verify')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
             .send({})
             .then((res) => {
@@ -109,7 +109,7 @@ describe('JWT Verification Tests', () => {
             id: crypto.randomBytes(24).toString('hex'),
             username: 'alex'
         }, process.env.JWT_TEST_SECRET);
-        return request.get('/api/auth/token/verify')
+        return request.get('/jailors/api/auth/token/verify')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
             .send({})
             .then((res) => {
@@ -123,7 +123,7 @@ describe('JWT Verification Tests', () => {
             id: crypto.randomBytes(24).toString('hex'),
             username: 'alex'
         }, "BAD_SECRET");
-        return request.get('/api/auth/token/verify')
+        return request.get('/jailors/api/auth/token/verify')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
             .send({})
             .then((res) => {
@@ -132,7 +132,7 @@ describe('JWT Verification Tests', () => {
     })
 
     test('Invalid Token Test - Missing Cookie', () => {
-        return request.get('/api/auth/token/verify')
+        return request.get('/jailors/api/auth/token/verify')
             .send({})
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);

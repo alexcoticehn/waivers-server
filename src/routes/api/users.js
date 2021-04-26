@@ -36,7 +36,7 @@ router.post("/login", RequestController.verifyLoginRequest, AuthController.userL
 router.put('/reset/send', RequestController.verifyPasswordResetRequest, PasswordResetController.sendResetEmail);
 
 /**
- * GET route to check validity of password reset token
+ * POST route to check validity of password reset token
  * Sample request:
  * {
  *  token: ...
@@ -49,7 +49,7 @@ router.put('/reset/send', RequestController.verifyPasswordResetRequest, Password
  *  token: ...
  * }
  */
-router.get("/reset/verify", RequestController.verifyPasswordResetTokenRequest, PasswordResetController.verifyResetTokenValid);
+router.post("/reset/verify", RequestController.verifyPasswordResetTokenRequest, PasswordResetController.verifyResetTokenValid);
 
 /**
  * PATCH route to reset a user's password

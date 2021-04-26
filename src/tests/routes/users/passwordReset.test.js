@@ -71,7 +71,7 @@ describe('Verify Password Reset Link Tests', () => {
         await PasswordResetLinks.deleteMany({});
         const user = await UsersService.findUserByUsername('acoticehn');
         const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
-        return request.get('/jailors/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: resetLink.token
             })
@@ -94,7 +94,7 @@ describe('Verify Password Reset Link Tests', () => {
             user_id: user._id
         }
         await PasswordResetLinks.create(expiredResetLink);
-        return request.get('/jailors/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: token
             })
@@ -117,7 +117,7 @@ describe('Verify Password Reset Link Tests', () => {
             user_id: user._id
         }
         await PasswordResetLinks.create(expiredResetLink);
-        return request.get('/jailors/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: token
             })
@@ -130,7 +130,7 @@ describe('Verify Password Reset Link Tests', () => {
     })
 
     test('Password Reset Link Invalid - Does Not Exist', async () => {
-        return request.get('/jailors/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: crypto.randomBytes(20).toString('hex')
             })
@@ -152,7 +152,7 @@ describe('Verify Password Reset Link Tests', () => {
             user_id: new ObjectId(crypto.randomBytes(12).toString('hex'))
         }
         await PasswordResetLinks.create(expiredResetLink);
-        return request.get('/jailors/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: token
             })
@@ -165,7 +165,7 @@ describe('Verify Password Reset Link Tests', () => {
     })
 
     test('Invalid Request - No Token Supplied', async () => {
-        return request.get('/jailors/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 bad_key: '435ng45wt45t5'
             })

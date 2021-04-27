@@ -109,7 +109,7 @@ module.exports.resetPasswordConfirm = function(req, res, next) {
                                 throw new JailorsError("An error occurred, please try again", StatusCodes.UNAUTHORIZED);
                             }
                             const responseToken = AuthService.generateJWT(user.username, user._id);
-                            res.setHeader('Set-Cookie', `token=${responseToken}; HttpOnly; Secure`);
+                            res.setHeader('Set-Cookie', `token=${responseToken}; HttpOnly; Secure; SameSite=None`);
                             return res.json();
                         })
                         .catch((err) => {

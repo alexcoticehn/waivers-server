@@ -3,6 +3,7 @@ const { JailorsError } = require('../errors/JailorsError');
 const StatusCodes = require('../constants/StatusCodes');
 const AuthService = require('../services/auth/AuthService');
 const PassportConstants = require('../constants/PassportConstants');
+const parser = require('ua-parser-js');
 
 /**
  * Method to handle login requests
@@ -15,8 +16,13 @@ module.exports.userLogin = function(req, res, next) {
 
         if (user) {
             const token = AuthService.generateJWT(user.username, user._id);
+            const userAgent = parser(req.headers['user-agent']);
             if (process.env.NODE_ENV === 'production') {
-                res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; SameSite=None; Secure; Path=/jailors/api`);
+                if (userAgent.browser.name.includes('Safari')) {
+                    res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; Secure; Path=/jailors/api`);
+                } else {
+                    res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; SameSite=None; Secure; Path=/jailors/api`);
+                }
             } else {
                 res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; Path=/jailors/api`);
             }

@@ -19,7 +19,7 @@ module.exports.userLogin = function(req, res, next) {
             const userAgent = parser(req.headers['user-agent']);
             if (process.env.NODE_ENV === 'production') {
                 if (userAgent.browser.name.includes('Safari')) {
-                    res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; Secure; Path=/jailors/api`);
+                    res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; SameSite=None; Secure; Path=/jailors/api`);
                 } else {
                     res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; SameSite=None; Secure; Path=/jailors/api`);
                 }

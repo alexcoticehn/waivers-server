@@ -1,8 +1,7 @@
 const router = require("express").Router();
-const UsersController = require('../../controllers/UsersController');
+const AuthController = require('../../controllers/AuthController');
 const RequestController = require('../../controllers/RequestController');
 const PasswordResetController = require('../../controllers/PasswordResetController');
-const StatusCodes = require("../../constants/StatusCodes");
 
 /**
  * POST route to process login requests
@@ -18,7 +17,7 @@ const StatusCodes = require("../../constants/StatusCodes");
  * {
  * }
  */ 
-router.post("/login", RequestController.verifyLoginRequest, UsersController.userLogin);
+router.post("/login", RequestController.verifyLoginRequest, AuthController.userLogin);
 
 /**
  * POST route to create and send password reset link
@@ -37,7 +36,7 @@ router.post("/login", RequestController.verifyLoginRequest, UsersController.user
 router.put('/reset/send', RequestController.verifyPasswordResetRequest, PasswordResetController.sendResetEmail);
 
 /**
- * GET route to check validity of password reset token
+ * POST route to check validity of password reset token
  * Sample request:
  * {
  *  token: ...
@@ -50,7 +49,7 @@ router.put('/reset/send', RequestController.verifyPasswordResetRequest, Password
  *  token: ...
  * }
  */
-router.get("/reset/verify", RequestController.verifyPasswordResetTokenRequest, PasswordResetController.verifyResetTokenValid);
+router.post("/reset/verify", RequestController.verifyPasswordResetTokenRequest, PasswordResetController.verifyResetTokenValid);
 
 /**
  * PATCH route to reset a user's password
@@ -67,12 +66,5 @@ router.get("/reset/verify", RequestController.verifyPasswordResetTokenRequest, P
  * }
  */
 router.patch("/reset/confirm", RequestController.verifyPasswordResetConfirmationRequest, PasswordResetController.resetPasswordConfirm);
-
-/**
- * GET route to verify if a user's token is still valid
- */
-router.get("/token/verify", UsersController.verifyJWT, (req, res, _next) => {
-    return res.status(StatusCodes.OK).json();
-});
 
 module.exports = router;

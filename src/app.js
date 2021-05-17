@@ -12,7 +12,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 // const isTest = process.env.NODE_ENV === 'test';
 const isDev = process.env.NODE_ENV === 'development';
 
-const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://jailors.xyz']
+const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://jailors.xyz', 
+    'https://production-branch.d2np6ogyacfunk.amplifyapp.com']
 
 const corsConfig = {
     origin: function(origin, callback) {
@@ -47,9 +48,9 @@ require('./models/PasswordResetLinks');
 
 // Routes
 const routes = require('./routes');
-app.use('/api', routes);
+app.use('/jailors/api', routes);
 
-app.all('/api/*', (req, res, next) => {
+app.all('/jailors/api/*', (req, res, next) => {
     const error = new Error('This URL does not exist on the server');
     error.status = 404;
 

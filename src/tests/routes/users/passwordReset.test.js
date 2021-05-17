@@ -20,7 +20,7 @@ afterAll(async () => {
 
 describe('Request Password Reset Link Tests', () => {
     test('Successful Password Reset Request', async () => {
-        return request.put('/api/users/reset/send')
+        return request.put('/jailors/api/users/reset/send')
             .send({
                 user: {
                     email: 'alcabc7@hotmail.com'
@@ -32,7 +32,7 @@ describe('Request Password Reset Link Tests', () => {
     })
 
     test('Unsuccessful Password Reset - Bad Request No User Object', async () => {
-        return request.put('/api/users/reset/send')
+        return request.put('/jailors/api/users/reset/send')
             .send({
                 email: 'alcabc7@hotmail.com'
             })
@@ -42,7 +42,7 @@ describe('Request Password Reset Link Tests', () => {
     })
 
     test('Unsuccessful Password Reset - Bad Request No Email Object', async () => {
-        return request.put('/api/users/reset/send')
+        return request.put('/jailors/api/users/reset/send')
             .send({
                 user: {
                     user: 'alcabc7@hotmail.com'
@@ -54,7 +54,7 @@ describe('Request Password Reset Link Tests', () => {
     })
 
     test('Unsuccessful Password Reset - Unauthorized Nonexistent Email', async () => {
-        return request.put('/api/users/reset/send')
+        return request.put('/jailors/api/users/reset/send')
             .send({
                 user: {
                     email: 'alhhhhh@hotmail.com'
@@ -71,7 +71,7 @@ describe('Verify Password Reset Link Tests', () => {
         await PasswordResetLinks.deleteMany({});
         const user = await UsersService.findUserByUsername('acoticehn');
         const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
-        return request.get('/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: resetLink.token
             })
@@ -94,7 +94,7 @@ describe('Verify Password Reset Link Tests', () => {
             user_id: user._id
         }
         await PasswordResetLinks.create(expiredResetLink);
-        return request.get('/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: token
             })
@@ -117,7 +117,7 @@ describe('Verify Password Reset Link Tests', () => {
             user_id: user._id
         }
         await PasswordResetLinks.create(expiredResetLink);
-        return request.get('/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: token
             })
@@ -130,7 +130,7 @@ describe('Verify Password Reset Link Tests', () => {
     })
 
     test('Password Reset Link Invalid - Does Not Exist', async () => {
-        return request.get('/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: crypto.randomBytes(20).toString('hex')
             })
@@ -152,7 +152,7 @@ describe('Verify Password Reset Link Tests', () => {
             user_id: new ObjectId(crypto.randomBytes(12).toString('hex'))
         }
         await PasswordResetLinks.create(expiredResetLink);
-        return request.get('/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 token: token
             })
@@ -165,7 +165,7 @@ describe('Verify Password Reset Link Tests', () => {
     })
 
     test('Invalid Request - No Token Supplied', async () => {
-        return request.get('/api/users/reset/verify')
+        return request.post('/jailors/api/users/reset/verify')
             .send({
                 bad_key: '435ng45wt45t5'
             })
@@ -181,7 +181,7 @@ describe('Confirm Password Reset Tests', () => {
         const test_password = crypto.randomBytes(5).toString('hex');
         expect(await user.isValidPassword(test_password)).toBe(false);
         const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
-        return request.patch('/api/users/reset/confirm')
+        return request.patch('/jailors/api/users/reset/confirm')
             .send({
                 id: user.id,
                 password: test_password,
@@ -195,7 +195,7 @@ describe('Confirm Password Reset Tests', () => {
     })
 
     test('Unsuccessful Password Reset Change - Missing parameter', async () => {
-        return request.patch('/api/users/reset/confirm')
+        return request.patch('/jailors/api/users/reset/confirm')
             .send({
                 password: 'test_password',
                 token: 'djgfg848473tgfg'
@@ -207,7 +207,7 @@ describe('Confirm Password Reset Tests', () => {
 
     test('Unsuccessful Password Reset Change - Bad Token', async () => {
         let user = await UsersService.findUserByUsername('acoticehn');
-        return request.patch('/api/users/reset/confirm')
+        return request.patch('/jailors/api/users/reset/confirm')
             .send({
                 id: user.id,
                 password: 'test_password',
@@ -221,7 +221,7 @@ describe('Confirm Password Reset Tests', () => {
     test('Unsuccessful Password Reset Change - Good Token, Bad UserID', async () => {
         let user = await UsersService.findUserByUsername('acoticehn');
         const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user._id);
-        return request.patch('/api/users/reset/confirm')
+        return request.patch('/jailors/api/users/reset/confirm')
             .send({
                 id: '45t5gtg66',
                 password: 'test_password',

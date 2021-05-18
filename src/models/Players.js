@@ -4,8 +4,7 @@ var Schema = mongoose.Schema;
 
 // define Schema
 const PlayersSchema = new Schema({
-    firstname: String,
-    lastname: String,
+    fullname: String,
     nhl_id: Number
 })
 

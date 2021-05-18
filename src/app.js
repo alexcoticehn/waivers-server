@@ -46,6 +46,7 @@ if (isDev) {
 require('./models/Users');
 require('./models/PasswordResetLinks');
 require('./models/Teams');
+require('./models/Players');
 
 // Routes
 const routes = require('./routes');

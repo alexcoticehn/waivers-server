@@ -8,7 +8,8 @@
     "lint": "./node_modules/.bin/eslint ./src/*.js",
     "start": "node ./src/server.js",
     "dev": "nodemon -r dotenv/config ./src/server.js",
-    "create": "node ./src/bin/create_users.js"
+    "create_users": "node ./src/bin/create_users.js",
+    "create_teams": "node ./src/bin/create_teams.js"
   },
   "author": "Alex Cotic-Ehn",
   "dependencies": {

@@ -30,8 +30,12 @@ async function runScript() {
         if (team.roster) {
             for (let player of team.roster.roster) {
                 if (!(await PlayersModel.findOne({nhl_id: player.person.id}))) {
+                    let player_info = await axios.get('https://statsapi.web.nhl.com/api/v1/people/' + player.person.id);
+                    let firstName = player_info.data.people[0].firstName;
+                    let lastName = player_info.data.people[0].lastName;
                     players_to_add.push({
-                        fullname: player.person.fullName,
+                        firstname: firstName,
+                        lastname: lastName,
                         nhl_id: player.person.id
                     })
                 }

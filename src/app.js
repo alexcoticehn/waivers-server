@@ -36,10 +36,10 @@ app.use(compression());
 // configure mongoose
 if (isDev) {
     // For dev environment
-    mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
     mongoose.set('debug', true);
 } else if (isProduction) {
-    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING_PROD, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 // Models

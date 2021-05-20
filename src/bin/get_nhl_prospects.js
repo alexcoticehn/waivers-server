@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const PlayersModel = mongoose.model('Players');
 
 async function connectDB() {
-    await mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING_PROD, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 async function disconnectDB() {

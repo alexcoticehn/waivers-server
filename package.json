@@ -10,7 +10,8 @@
     "dev": "nodemon -r dotenv/config ./src/server.js",
     "create_users": "node ./src/bin/create_users.js",
     "create_teams": "node ./src/bin/create_teams.js",
-    "get_nhl_players": "node ./src/bin/get_nhl_players.js"
+    "get_nhl_players": "node ./src/bin/get_nhl_players.js",
+    "get_nhl_prospects": "node ./src/bin/get_nhl_prospects.js"
   },
   "author": "Alex Cotic-Ehn",
   "dependencies": {

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Teams = mongoose.model('Teams');
 
-module.exports.findAllTeams = async function() {
-    return await Teams.find({});
+/**
+ * 
+ * @returns Array of all mongoose team objects (version excluded)
+ */
+module.exports.getAllTeams = async function() {
+    return await Teams.find({}).select('-__v');
 }

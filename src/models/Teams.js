@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 // define Schema
 const TeamsSchema = new Schema({
     name: String,
-    owner_id: {
+    owner: {
         type: Schema.Types.ObjectId,
         ref: 'Users'
     }

@@ -10,7 +10,11 @@ const UsersSchema = new Schema({
   firstname: String,
   lastname: String,
   email: String,
-  password: String
+  password: String,
+  team: {
+    type: Schema.Types.ObjectId,
+    ref: 'Teams'
+  }
 });
 
 /**

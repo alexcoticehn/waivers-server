@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 
 // define Schema
 const StandingsSchema = new Schema({
-    team_id: {
+    team: {
         type: Schema.Types.ObjectId,
         ref: 'Teams'
     },
-    year_id: {
+    year: {
         type: Schema.Types.ObjectId,
         ref: 'Years'
     },

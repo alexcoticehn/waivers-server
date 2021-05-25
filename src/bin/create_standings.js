@@ -26,6 +26,7 @@ async function enterStandings(standings) {
 
 async function runScript() {
     await connectDB();
+    // Find the year_id of the year you're adding standings for and enter it here
     const year_id = new ObjectId("60ac32a2d271531998e280d4");
 
     const Alex = await UsersService.findUserAndTeamByUsername('acoticehn');

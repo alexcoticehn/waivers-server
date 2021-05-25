@@ -33,3 +33,11 @@ module.exports.findUserById = async function(userId) {
 module.exports.saveUserPassword = async function(user, new_password) {
     return await user.saveNewPassword(new_password);
 }
+
+/**
+ * 
+ * @param {String} username 
+ */
+module.exports.findUserAndTeamByUsername = async function(username) {
+    return await Users.findOne({username: username}).populate('team');
+}

@@ -4,6 +4,20 @@ const TeamsController = require('../../controllers/TeamsController');
 
 /**
  * GET request to return all teams and info, but not rosters
+ * Sample response: 
+ * {
+ *   teams: [
+ *      {
+ *         _id: "5tgre66g6h",
+ *         name: "Don't Toews Me, Bro"
+ *         owner: {
+ *           _id: "5geh6h",
+ *           firstname: "Alex"
+ *           lastname: "Cotic-Ehn"
+ *         }
+ *      }
+ *   ]
+ * }
  */
 router.get('', AuthController.verifyJWT, TeamsController.getTeams);
 

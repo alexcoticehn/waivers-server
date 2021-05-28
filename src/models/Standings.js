@@ -14,6 +14,8 @@ const StandingsSchema = new Schema({
     },
     position: Number,
     points: Number
-})
+});
+
+StandingsSchema.set('toJSON', { versionKey: false });
 
 mongoose.model('Standings', StandingsSchema);

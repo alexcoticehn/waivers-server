@@ -8,4 +8,6 @@ const YearsSchema = new Schema({
     endDate: Date
 });
 
+YearsSchema.set('toJSON', { versionKey: false });
+
 mongoose.model('Years', YearsSchema);

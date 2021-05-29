@@ -13,7 +13,8 @@
     "get_nhl_players": "node ./src/bin/get_nhl_players.js",
     "get_nhl_prospects": "node ./src/bin/get_nhl_prospects.js",
     "create_years": "node ./src/bin/create_years.js",
-    "create_standings": "node ./src/bin/create_standings.js"
+    "create_standings": "node ./src/bin/create_standings.js",
+    "update_prospect_team_names": "node ./src/bin/update_prospect_team_names.js"
   },
   "author": "Alex Cotic-Ehn",
   "dependencies": {

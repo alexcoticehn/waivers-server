@@ -15,6 +15,7 @@ const TeamsController = require('../../controllers/TeamsController');
  *           firstname: "Alex"
  *           lastname: "Cotic-Ehn"
  *         }
+ *         name_prospect: "Kazakh Politics"
  *      }
  *   ]
  * }

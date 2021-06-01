@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 // const isTest = process.env.NODE_ENV === 'test';
 const isDev = process.env.NODE_ENV === 'development';
 
-const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://jailors.xyz', 
+const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://www.jailors.xyz', 
     'https://production-branch.d2np6ogyacfunk.amplifyapp.com']
 
 const corsConfig = {
@@ -36,15 +36,19 @@ app.use(compression());
 // configure mongoose
 if (isDev) {
     // For dev environment
-    mongoose.connect(process.env.DB_HOST_DEV + process.env.DB_NAME_DEV, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
     mongoose.set('debug', true);
 } else if (isProduction) {
-    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING_PROD, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 // Models
 require('./models/Users');
 require('./models/PasswordResetLinks');
+require('./models/Teams');
+require('./models/Players');
+require('./models/Years');
+require('./models/Standings');
 
 // Routes
 const routes = require('./routes');

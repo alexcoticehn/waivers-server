@@ -18,7 +18,7 @@ module.exports.sendResetEmail = function(req, res, next) {
             if (!user) {
                 throw new JailorsError('This email is not associated with a user account', StatusCodes.UNAUTHORIZED);
             }
-            PasswordResetService.createOrUpdatePasswordResetLink(user._id)
+            PasswordResetService.createOrUpdatePasswordResetLink(user.id)
                 .then((resetLink) => {
                     EmailService.sendEmail(user.email, 'Password Reset Email', EmailService.getResetPasswordEmailBody(req.get('referer'), resetLink.token))
                         .then(() => {

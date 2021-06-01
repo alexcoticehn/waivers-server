@@ -28,6 +28,7 @@ describe('Password Reset Link Generation Tests', () => {
         const resetLink = await PasswordResetService.createOrUpdatePasswordResetLink(user_id);
         const secondLink = await PasswordResetService.createOrUpdatePasswordResetLink(user_id);
         expect(resetLink.token).toBe(secondLink.token);
+        expect(resetLink.tokenExpires).not.toBe(secondLink.tokenExpires);
     })
 })
 

@@ -88,7 +88,7 @@ async function runScript() {
     }
 
     const WDC = {
-        name: "The Wet Dick Carters",
+        name: "The Carters",
         owner: Ian.id
     }
 

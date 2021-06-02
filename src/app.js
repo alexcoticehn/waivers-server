@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 // const isTest = process.env.NODE_ENV === 'test';
 const isDev = process.env.NODE_ENV === 'development';
 
-const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://www.jailors.xyz', 
+const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://www.jailors.xyz', 'https://jailors.xyz',
     'https://production-branch.d2np6ogyacfunk.amplifyapp.com']
 
 const corsConfig = {

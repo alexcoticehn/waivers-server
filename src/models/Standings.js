@@ -13,7 +13,9 @@ const StandingsSchema = new Schema({
         ref: 'Years'
     },
     position: Number,
-    points: Number
+    points: Number,
+    teamName: String,
+    ownerName: String
 });
 
 StandingsSchema.set('toJSON', { versionKey: false });

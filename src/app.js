@@ -11,6 +11,7 @@ const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
 // const isTest = process.env.NODE_ENV === 'test';
 const isDev = process.env.NODE_ENV === 'development';
+const isStaging = process.env.NODE_ENV === 'staging';
 
 const corsWhitelist = ['http://localhost:8080', 'https://jailors-client.herokuapp.com', 'https://www.jailors.xyz', 'https://jailors.xyz',
     'https://production-branch.d2np6ogyacfunk.amplifyapp.com']
@@ -45,6 +46,8 @@ if (isDev) {
     const port_prod = process.env.DB_PORT_PROD;
     const name = process.env.DB_NAME_PROD;
     mongoose.connect(`mongodb://${username}:${password}@${ip}:${port_prod}/${name}?authSource=admin`, { useNewUrlParser: true, useUnifiedTopology: true });
+} else if (isStaging) {
+    mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 // Models

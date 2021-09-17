@@ -2,19 +2,6 @@ const StatusCodes = require("../constants/StatusCodes");
 const {JailorsError} = require('../errors/JailorsError');
 
 /**
- * Verifies that a login request is sent in the correct format
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
-module.exports.verifyLoginRequest = function(req, res, next) {
-    if (!req.body.user || !req.body.user.username || !req.body.user.password) {
-        throw new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
-    }
-    next();
-}
-
-/**
  * Verifies that a password reset request is sent in the correct format
  * @param {*} req 
  * @param {*} res 

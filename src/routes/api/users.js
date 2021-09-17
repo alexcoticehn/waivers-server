@@ -2,6 +2,7 @@ const router = require("express").Router();
 const AuthController = require('../../controllers/AuthController');
 const RequestController = require('../../controllers/RequestController');
 const PasswordResetController = require('../../controllers/PasswordResetController');
+const { body } = require('express-validator');
 
 /**
  * POST route to process login requests
@@ -17,7 +18,7 @@ const PasswordResetController = require('../../controllers/PasswordResetControll
  * {
  * }
  */ 
-router.post("/login", RequestController.verifyLoginRequest, AuthController.userLogin);
+router.post("/login", body(['user.username', 'user.password']).notEmpty(), AuthController.userLogin);
 
 /**
  * POST route to create and send password reset link

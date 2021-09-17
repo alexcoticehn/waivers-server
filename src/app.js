@@ -72,10 +72,9 @@ app.all('/jailors/api/*', (req, res, next) => {
 if (!isProduction) {
     app.use((err, req, res, _next) => {
         res.status(err.status || 500).json({
-            errors: {
-                message: err.message,
-                stack_trace: err.stack,
-            },
+            errors: err.errors,
+            message: err.message,
+            stack_trace: err.stack
         });
     });
 } else {
@@ -83,9 +82,8 @@ if (!isProduction) {
         res.status(err.status || 500);
 
         res.json({
-            errors: {
-                message: err.message
-            },
+            errors: err.errors,
+            message: err.message
         });
     });
 }

@@ -3,16 +3,11 @@ const { JailorsError } = require('../errors/JailorsError');
 const StatusCodes = require('../constants/StatusCodes');
 const AuthService = require('../services/auth/AuthService');
 const PassportConstants = require('../constants/PassportConstants');
-const { validationResult } = require('express-validator');
 
 /**
  * Method to handle login requests
  */
 module.exports.userLogin = function(req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        next(new JailorsError('Missing Request Parameter', StatusCodes.BAD_REQUEST));
-    }
     return PassportService.authenticate('login', { session: false }, (err, user) => {
         if (err) {
             next(new JailorsError(err, StatusCodes.UNAUTHORIZED));

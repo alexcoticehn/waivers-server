@@ -18,7 +18,7 @@ const { body } = require('express-validator');
  * {
  * }
  */ 
-router.post("/login", body(['user.username', 'user.password']).notEmpty(), AuthController.userLogin);
+router.post("/login", body(['user.username', 'user.password']).notEmpty(), RequestController.checkValidationErrors, AuthController.userLogin);
 
 /**
  * POST route to create and send password reset link

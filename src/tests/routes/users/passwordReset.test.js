@@ -100,7 +100,7 @@ describe('Verify Password Reset Link Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
-                expect(res.body.errors.message).toBe(
+                expect(res.body.message).toBe(
                     'This link is no longer valid. Please request a new one.'
                 );
             })
@@ -123,7 +123,7 @@ describe('Verify Password Reset Link Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
-                expect(res.body.errors.message).toBe(
+                expect(res.body.message).toBe(
                     'This link is no longer valid. Please request a new one.'
                 );
             })
@@ -136,7 +136,7 @@ describe('Verify Password Reset Link Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
-                expect(res.body.errors.message).toBe(
+                expect(res.body.message).toBe(
                     'This is not a valid link. Please request a new one.'
                 );
             })
@@ -158,7 +158,7 @@ describe('Verify Password Reset Link Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.UNAUTHORIZED);
-                expect(res.body.errors.message).toBe(
+                expect(res.body.message).toBe(
                     'An error occurred, please try again'
                 );
             })

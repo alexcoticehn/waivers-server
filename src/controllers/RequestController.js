@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator");
 const StatusCodes = require("../constants/StatusCodes");
-const {JailorsError} = require('../errors/JailorsError');
 const {ValidationError} = require('../errors/ValidationError');
 
 module.exports.checkValidationErrors = function(req, res, next) {

@@ -12,19 +12,6 @@ module.exports.checkValidationErrors = function(req, res, next) {
 }
 
 /**
- * Verifies that a password reset request is sent in the correct format
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- */
-module.exports.verifyPasswordResetRequest = function(req, res, next) {
-    if (!req.body.user || !req.body.user.email) {
-        throw new JailorsError('Missing request parameter', StatusCodes.BAD_REQUEST);
-    }
-    next()
-}
-
-/**
  * Verifies that the password reset token check request is sent in the correct format
  * @param {*} req 
  * @param {*} res 

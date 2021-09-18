@@ -34,7 +34,7 @@ router.post("/login", body(['user.username', 'user.password']).notEmpty(), Reque
  *  message: "Password reset email sent"
  * }
  */
-router.put('/reset/send', RequestController.verifyPasswordResetRequest, PasswordResetController.sendResetEmail);
+router.put('/reset/send', body('user.email').notEmpty(), RequestController.checkValidationErrors, PasswordResetController.sendResetEmail);
 
 /**
  * POST route to check validity of password reset token

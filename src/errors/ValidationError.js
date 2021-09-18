@@ -5,6 +5,7 @@ class ValidationError extends Error {
         super();
         this.errors = messages;
         this.status = statusCode;
+        this.message = "A validation error occurred. See details under errors."
         Error.captureStackTrace(this, this.constructor);
     }
 }

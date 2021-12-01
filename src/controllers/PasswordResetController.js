@@ -110,7 +110,7 @@ module.exports.resetPasswordConfirm = function(req, res, next) {
                             }
                             const responseToken = AuthService.generateJWT(user.username, user._id);
                             res.setHeader('Set-Cookie', `token=${responseToken}; HttpOnly; Secure; SameSite=None; Path=/jailors/api`);
-                            return res.json();
+                            return res.json({ admin: user.admin });
                         })
                         .catch((err) => {
                             next(err);

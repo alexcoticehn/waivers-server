@@ -20,7 +20,7 @@ module.exports.userLogin = function(req, res, next) {
             } else {
                 res.setHeader('Set-Cookie', `${PassportConstants.TokenCookie}=${token}; HttpOnly; Path=/jailors/api`);
             }
-            return res.json();
+            return res.json({ admin: user.admin });
         }        
     })(req, res, next);
 }

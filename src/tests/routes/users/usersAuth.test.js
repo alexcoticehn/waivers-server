@@ -17,7 +17,7 @@ afterAll(async () => {
 })
 
 describe('Login Tests', () => {
-    test('Successful Login Test', async () => {
+    test('Successful Login Test Non Admin', async () => {
         return request.post('/jailors/api/users/login')
             .send({
                 user: {
@@ -27,6 +27,21 @@ describe('Login Tests', () => {
             })
             .then((res) => {
                 expect(res.status).toBe(StatusCodes.OK);
+                expect(res.body.admin).toBeFalsy();
+            });
+    })
+
+    test('Successful Login Test Admin', async () => {
+        return request.post('/jailors/api/users/login')
+            .send({
+                user: {
+                    username: 'acoticehn',
+                    password: '123456789'
+                }
+            })
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+                expect(res.body.admin).toBeTruthy();
             });
     })
 

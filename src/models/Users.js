@@ -15,7 +15,7 @@ const UsersSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Teams'
   },
-  admin: Number
+  admin: Boolean
 });
 
 /**

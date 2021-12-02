@@ -57,6 +57,7 @@ require('./models/Teams');
 require('./models/Players');
 require('./models/Years');
 require('./models/Standings');
+require('./models/DraftPicks');
 
 // Routes
 const routes = require('./routes');

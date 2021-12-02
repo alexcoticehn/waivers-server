@@ -33,11 +33,15 @@ async function runScript() {
                     let player_info = await axios.get('https://statsapi.web.nhl.com/api/v1/people/' + player.person.id);
                     let firstName = player_info.data.people[0].firstName;
                     let lastName = player_info.data.people[0].lastName;
+                    console.log('Must add player ' + firstName + ' ' + lastName + ' ' + player.person.id);
                     players_to_add.push({
                         firstname: firstName,
                         lastname: lastName,
                         nhl_id: player.person.id
                     })
+                } else {
+                    let player_info = await axios.get('https://statsapi.web.nhl.com/api/v1/people/' + player.person.id);
+                    console.log('Already have player ' + player_info.data.people[0].firstName + ' ' + player_info.data.people[0].lastName + ' ' + player.person.id);
                 }
             }
         }

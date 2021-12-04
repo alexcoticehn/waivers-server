@@ -8,5 +8,5 @@ const Players = mongoose.model('Players');
  * @returns All players that match given name search criteria
  */
 module.exports.searchPlayersByFirstAndLastName = async function(firstname_string, lastname_string, limit) {
-    return await Players.find({ firstname: new RegExp(firstname_string, "i"), lastname: new RegExp(lastname_string, "i") }).limit(parseInt(limit)).exec();
+    return await Players.find({ firstname: new RegExp(firstname_string, "i"), lastname: new RegExp(lastname_string, "i") }).limit(limit).exec();
 }

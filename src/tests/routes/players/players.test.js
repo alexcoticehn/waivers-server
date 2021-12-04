@@ -51,4 +51,26 @@ describe('Search Players Tests', () => {
                 expect(['Greene', 'Andreoff']).toContain(res.body.players[1].lastname);
             })
     })
+
+    test('Get All Players with Last Name containing ar', async () => {
+        return request.get('/jailors/api/players?lastname=ar')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+                expect(res.body.players).toHaveLength(8);
+            })
+    })
+
+    test('Get P.K. Subban', async () => {
+        return request.get('/jailors/api/players?firstname=P.K.')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+                expect(res.body.players).toHaveLength(1);
+                expect(res.body.players[0]).toHaveProperty('firstname', 'P.K.');
+                expect(res.body.players[0]).toHaveProperty('lastname', 'Subban');
+            })
+    })
 })

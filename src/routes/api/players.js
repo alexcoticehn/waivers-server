@@ -18,6 +18,6 @@ const { query } = require('express-validator');
  *   ]
  * }
  */
-router.get('', AuthController.verifyJWT, query(['firstname', 'lastname']).default('').toLowerCase(), PlayersController.searchPlayers)
+router.get('', AuthController.verifyJWT, query(['firstname', 'lastname']).default('').toLowerCase(), query('limit').default(100), PlayersController.searchPlayers)
 
 module.exports = router;

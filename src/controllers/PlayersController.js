@@ -2,7 +2,7 @@ const { JailorsError } = require('../errors/JailorsError');
 const PlayersService = require('../services/players/PlayersService');
 
 module.exports.searchPlayers = async function(req, res, next) {
-    return PlayersService.searchPlayersByFirstAndLastName(req.query.firstname, req.query.lastname)
+    return PlayersService.searchPlayersByFirstAndLastName(req.query.firstname, req.query.lastname, req.query.limit)
         .then((players) => {
             return res.json({
                 players: players

@@ -62,6 +62,16 @@ describe('Search Players Tests', () => {
             })
     })
 
+    test('Get All Players with Last Name containing ar limit 2', async () => {
+        return request.get('/jailors/api/players?lastname=ar&limit=2')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({})
+            .then((res) => {
+                expect(res.status).toBe(StatusCodes.OK);
+                expect(res.body.players).toHaveLength(2);
+            })
+    })
+
     test('Get P.K. Subban', async () => {
         return request.get('/jailors/api/players?firstname=P.K.')
             .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])

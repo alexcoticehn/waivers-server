@@ -30,7 +30,8 @@ const PicksSchema = new Schema({
   overall: Number,
   contractYearsOriginal: Number,
   contractYearsRemaining: Number,
-  status: Number
+  status: Number,
+  timesExtended: Number
 });
 
 mongoose.model('DraftPicks', PicksSchema);

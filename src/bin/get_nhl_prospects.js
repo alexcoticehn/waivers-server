@@ -26,7 +26,7 @@ async function runScript() {
     let players_to_add = []
 
     // Currently have this set to only grab from 1 draft at a time
-    for (let i = 2020; i < 2021; i++) {
+    for (let i = 2021; i < 2022; i++) {
         let draft_results = await axios.get('https://statsapi.web.nhl.com/api/v1/draft/' + i);
         for (let rounds of draft_results.data.drafts[0].rounds) {
             for (let pick of rounds.picks) {

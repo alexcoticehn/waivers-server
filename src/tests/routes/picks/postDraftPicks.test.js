@@ -16,7 +16,7 @@ afterAll(async () => {
     await mongoose.disconnect();
 })
 
-describe('Post Draft Picks Tests', () => {
+describe('Post Draft Picks Invalid Request Tests', () => {
     const token = AuthService.generateJWT('alex', crypto.randomBytes(24).toString('hex'));
     DraftPicks.deleteMany({});
 

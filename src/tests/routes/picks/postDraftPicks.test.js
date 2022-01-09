@@ -6,7 +6,7 @@ const AuthService = require('../../../services/auth/AuthService');
 const PassportConstants = require('../../../constants/PassportConstants');
 const StatusCodes = require('../../../constants/StatusCodes');
 const crypto = require('crypto');
-const DraftPicks = mongoose.model("DraftPicks");
+//const DraftPicks = mongoose.model("DraftPicks");
 
 beforeAll(async () => {
     await mongoose.connect(process.env.DB_HOST_DEV + 'jailors_players_test', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -18,7 +18,7 @@ afterAll(async () => {
 
 describe('Post Draft Picks Invalid Request Tests', () => {
     const token = AuthService.generateJWT('alex', crypto.randomBytes(24).toString('hex'));
-    DraftPicks.deleteMany({});
+ //   DraftPicks.deleteMany({});
 
     test('Invalid Request - Missing Year', async () => {
         request.post('/jailors/api/picks')
@@ -90,5 +90,35 @@ describe('Post Draft Picks Invalid Request Tests', () => {
                 expect(res.statusCode).toBe(StatusCodes.BAD_REQUEST);
                 expect(res.body.errors).toHaveLength(2);
             })
+    })
+
+    test('Valid Request - Minimum Provided Data', async () => {
+       return request.post('/jailors/api/picks')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({
+                originalTeam: "61d24b1f925d775745e2f97f",
+                year: "61d24dec70a75cbb7ff05337",
+            })
+            .then((res) => {
+                expect(res.statusCode).toBe(StatusCodes.OK);
+            }) 
+    })
+})
+
+describe('Post Draft Picks Valid Request Tests', () => {
+    const token = AuthService.generateJWT('alex', crypto.randomBytes(24).toString('hex'));
+
+    test('Valid Request - Minimum Provided Data', async () => {
+       return request.post('/jailors/api/picks')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({
+                originalTeam: "61d24b1f925d775745e2f97f",
+                year: "61d24dec70a75cbb7ff05337",
+            })
+            .then((res) => {
+                expect(res.statusCode).toBe(StatusCodes.OK);
+                expect(res.body.pick.year).toBe("61d24dec70a75cbb7ff05337");
+                expect(res.body.pick.originalTeam).toBe("61d24b1f925d775745e2f97f");
+            }) 
     })
 })

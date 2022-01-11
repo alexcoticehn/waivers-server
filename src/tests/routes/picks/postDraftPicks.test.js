@@ -103,10 +103,13 @@ describe('Post Draft Picks Valid Request Tests', () => {
                 originalTeam: "61d24b1f925d775745e2f97f",
                 year: "61d24dec70a75cbb7ff05337",
             })
-            .then((res) => {
+            .then(async (res) => {
                 expect(res.statusCode).toBe(StatusCodes.OK);
                 expect(res.body.pick.year).toBe("61d24dec70a75cbb7ff05337");
                 expect(res.body.pick.originalTeam).toBe("61d24b1f925d775745e2f97f");
+                const pick = await DraftPicks.findById(res.body.pick._id);
+                expect(pick.year.toString()).toBe("61d24dec70a75cbb7ff05337");
+                expect(pick.originalTeam.toString()).toBe("61d24b1f925d775745e2f97f");
             }) 
     })
 })

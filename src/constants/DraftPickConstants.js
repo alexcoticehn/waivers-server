@@ -6,5 +6,7 @@ module.exports = {
     StringOwned: "owned",
     StringDropped: "dropped",
     StringExpired: "expired",
-    StringPending: "pending"
+    StringPending: "pending",
+    MaxContractYears: 4,
+    LessContractYears: 3
 }

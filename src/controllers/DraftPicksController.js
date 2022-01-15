@@ -12,9 +12,6 @@ module.exports.saveDraftPick = async function(req, res, _next) {
     if (!body.currentTeam) {
         body.currentTeam = body.originalTeam;
     }
-    if (!body.contractYearsOriginal && body.player) {
-        body.contractYearsOriginal = DraftPickConstants.MaxContractYears;
-    }
     if (!body.player) {
         body.status = DraftPickConstants.StatusPending;
     }

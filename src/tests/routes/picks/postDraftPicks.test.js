@@ -112,4 +112,63 @@ describe('Post Draft Picks Valid Request Tests', () => {
                 expect(pick.originalTeam.toString()).toBe("61d24b1f925d775745e2f97f");
             }) 
     })
+    test('Valid Request - Maximum Provided Data', async () => {
+       return request.post('/jailors/api/picks')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({
+                originalTeam: "61d24b1f925d775745e2f97f",
+                year: "61d24dec70a75cbb7ff05337",
+                pickingTeam: "61d24b1f925d775745e2f97f",
+                round: 1,
+                currentTeam: "61d24b1f925d775745e2f982",
+                overall: 1,
+                player: "61a95c978be9093a2a514563",
+                status: 1,
+                pickingTeamName: "Test Team Name",
+                pickingOwnerName: "Test Name",
+                contractYearsOriginal: 3,
+                contractYearsRemaining: 2,
+                timesExtended: 0
+            })
+            .then(async (res) => {
+                expect(res.statusCode).toBe(StatusCodes.OK);
+                expect(res.body.pick.year).toBe("61d24dec70a75cbb7ff05337");
+                expect(res.body.pick.originalTeam).toBe("61d24b1f925d775745e2f97f");
+                const pick = await DraftPicks.findById(res.body.pick._id);
+                expect(pick.pickingTeam.toString()).toBe("61d24b1f925d775745e2f97f");
+                expect(pick.contractYearsOriginal).toBe(3);
+                expect(pick.status).toBe(1);
+                expect(pick.currentTeam.toString()).toBe("61d24b1f925d775745e2f982");
+                expect(pick.originalTeam.toString()).toBe("61d24b1f925d775745e2f97f");
+                expect(pick.year.toString()).toBe("61d24dec70a75cbb7ff05337");
+                expect(pick.round).toBe(1);
+                expect(pick.overall).toBe(1);
+                expect(pick.player.toString()).toBe("61a95c978be9093a2a514563");
+                expect(pick.pickingTeamName).toBe("Test Team Name");
+                expect(pick.pickingOwnerName).toBe("Test Name");
+                expect(pick.contractYearsRemaining).toBe(2);
+                expect(pick.timesExtended).toBe(0);
+            }) 
+    })
+
+    test('Valid Request - Maximum Provided Data', async () => {
+       return request.post('/jailors/api/picks')
+            .set('Cookie', [`${PassportConstants.TokenCookie}=${token}`])
+            .send({
+                originalTeam: "61d24b1f925d775745e2f97f",
+                year: "61d24dec70a75cbb7ff05337",
+            })
+            .then(async (res) => {
+                expect(res.statusCode).toBe(StatusCodes.OK);
+                expect(res.body.pick.year).toBe("61d24dec70a75cbb7ff05337");
+                expect(res.body.pick.originalTeam).toBe("61d24b1f925d775745e2f97f");
+                expect(res.body.pick.currentTeam).toBe("61d24b1f925d775745e2f97f");
+                const pick = await DraftPicks.findById(res.body.pick._id);
+                expect(pick.originalTeam.toString()).toBe("61d24b1f925d775745e2f97f");
+                expect(pick.year.toString()).toBe("61d24dec70a75cbb7ff05337");
+                expect(pick.currentTeam.toString()).toBe("61d24b1f925d775745e2f97f");
+            }) 
+    })
+
+
 })

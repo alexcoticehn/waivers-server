@@ -6,11 +6,11 @@ const DraftPicksService = require('../services/picks/DraftPicksService');
  */
 module.exports.saveDraftPick = async function(req, res, _next) {
     const body = req.body;
-    if (!body.pickingTeam && body.player) {
-        body.pickingTeam = body.originalTeam;
-    }
     if (!body.currentTeam) {
         body.currentTeam = body.originalTeam;
+    }
+    if (!body.pickingTeam && body.player) {
+        body.pickingTeam = body.currentTeam;
     }
     if (!body.player) {
         body.status = DraftPickConstants.StatusPending;

@@ -7,5 +7,6 @@ router.use('/teams', require('./api/teams'));
 router.use('/standings', require('./api/standings'));
 router.use('/years', require('./api/years'));
 router.use('/players', require('./api/players'));
+router.use('/picks', require('./api/picks'));
 
 module.exports = router;

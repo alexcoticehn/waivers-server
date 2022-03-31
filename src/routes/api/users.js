@@ -14,8 +14,9 @@ const { body } = require('express-validator');
  *  }
  * }
  * 
- * Sample response: (empty) Sets httpOnly cookie with JWT
+ * Sample response: (empty, unless admin) Sets httpOnly cookie with JWT
  * {
+ *  admin: true
  * }
  */ 
 router.post("/login", body(['user.username', 'user.password']).notEmpty(), RequestController.checkValidationErrors, AuthController.userLogin);

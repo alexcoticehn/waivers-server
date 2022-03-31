@@ -3,12 +3,12 @@
  */
 require('dotenv').config();
 require('../models/Years');
-// const argv = require('minimist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2));
 const mongoose = require('mongoose');
 const YearsModel = mongoose.model('Years');
 
 async function connectDB() {
-    await mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(process.env.DB_HOST_DEV + argv.db, { useNewUrlParser: true, useUnifiedTopology: true });
 }
 
 async function disconnectDB() {

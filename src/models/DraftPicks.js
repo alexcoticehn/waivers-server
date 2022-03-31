@@ -10,7 +10,7 @@ const PicksSchema = new Schema({
   },
   player: {
     type: Schema.Types.ObjectId,
-    ref: 'Years'
+    ref: 'Players'
   },
   originalTeam: {
     type: Schema.Types.ObjectId,
@@ -20,13 +20,18 @@ const PicksSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Teams'
   },
+  currentTeam: {
+    type: Schema.Types.ObjectId,
+    ref: 'Teams'
+  },
   pickingTeamName: String,
   pickingOwnerName: String,
   round: Number,
   overall: Number,
   contractYearsOriginal: Number,
   contractYearsRemaining: Number,
-  status: String
+  status: Number,
+  timesExtended: Number
 });
 
 mongoose.model('DraftPicks', PicksSchema);

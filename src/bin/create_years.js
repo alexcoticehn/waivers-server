@@ -21,7 +21,7 @@ async function createYears(years_to_create) {
 
 async function runScript() {
     const year11 = {
-        startDate: new Date('2022-10-12'),
+        startDate: new Date('2021-10-12'),
         endDate: new Date('2022-05-01')
     }
 

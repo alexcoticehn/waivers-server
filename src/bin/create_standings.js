@@ -44,62 +44,82 @@ async function runScript() {
         {
             year: year_id,
             team: Alex.team.id,
-            position: 1,
-            points: 81
+            position: 8,
+            points: 35.5,
+            ownerName: "Alex Cotic-Ehn",
+            teamName: "Rock Out With Your Dach Out"
         },
         {
             year: year_id,
             team: Chris.team.id,
             position: 2,
-            points: 76
+            points: 77.5,
+            ownerName: "Chris Littomericzky",
+            teamName: "Dude, Where's Makar?"
         },
         {
             year: year_id,
             team: Dim.team.id,
-            position: 3,
-            points: 72.5
+            position: 1,
+            points: 94,
+            ownerName: "Dimitri Filipovic",
+            teamName: "Don't Be Saad"
         },
         {
             year: year_id,
             team: Nathan.team.id,
-            position: 4,
-            points: 67
+            position: 7,
+            points: 44,
+            ownerName: "Nathan Alvarez",
+            teamName: "Team TOO GOOD"
         },
         {
             year: year_id,
             team: Harry.team.id,
-            position: 5,
-            points: 66.5
+            position: 6,
+            points: 50,
+            ownerName: "Harrison Brown",
+            teamName: "Wheeler? I Hardly Knew Her!"
         },
         {
             year: year_id,
             team: Mike.team.id,
-            position: 6,
-            points: 48
+            position: 10,
+            points: 32,
+            ownerName: "Michael Winter",
+            teamName: "Bustin' Pumpkins"
         },
         {
             year: year_id,
             team: Ian.team.id,
-            position: 7,
-            points: 44
+            position: 5,
+            points: 53,
+            ownerName: "Ian Carter",
+            teamName: "The Wet Dick Carters"
         },
         {
             year: year_id,
             team: Jimmy.team.id,
-            position: 8,
-            points: 36
+            position: 9,
+            points: 35,
+            ownerName: "Jimmy Ghuman",
+            teamName: "McJesus!"
         },
         {
             year: year_id,
             team: Eric.team.id,
-            position: 9,
-            points: 32
+            position: 4,
+            points: 62,
+            ownerName: "Eric Wallin",
+            teamName: "Double Pennertration"
         },
         {
             year: year_id,
             team: Peter.team.id,
-            position: 10,
-            points: 27
+            position: 3,
+            points: 67,
+            ownerName: "Peter Bohdal",
+            teamName: "BIG MONEY"
         }
     ];
 

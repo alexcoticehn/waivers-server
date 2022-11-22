@@ -1,4 +1,11 @@
 const app = require('./app');
+const serverless = require('serverless-http');
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const port = process.env.PORT;
-app.listen(port, () => console.log("App listening on port " + port));
+if (isProduction) {
+   module.exports.handler = serverless(app); 
+} else {
+    app.listen(port, () => console.log("App listening on port " + port));
+}

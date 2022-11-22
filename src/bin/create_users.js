@@ -4,7 +4,7 @@
 require('dotenv').config();
 require('../models/Users');
 const argv = require('minimist')(process.argv.slice(2));
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const Passport = require('../constants/PassportConstants');
 const UsersModel = mongoose.model('Users');

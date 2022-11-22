@@ -18,7 +18,7 @@ const corsWhitelist = ['http://localhost:8080', 'https://www.jailors.xyz', 'http
 
 const corsConfig = {
     origin: function(origin, callback) {
-        if (/*corsWhitelist.indexOf(origin) !== -1 || !isProduction*/ true) {
+        if (corsWhitelist.indexOf(origin) !== -1 || !isProduction) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));

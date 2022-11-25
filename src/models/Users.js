@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const PassportConstants = require('../constants/PassportConstants');
 
 var Schema = mongoose.Schema;

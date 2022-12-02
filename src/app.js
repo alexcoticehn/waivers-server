@@ -82,9 +82,6 @@ if (!isProduction) {
     app.use((err, req, res, _next) => {
         res.status(err.status || 500);
 
-        res.header('Access-Control-Allow-Origin', '*')
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-
         res.json({
             errors: err.errors,
             message: err.message

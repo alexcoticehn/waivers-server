@@ -17,6 +17,7 @@ const corsWhitelist = ['http://localhost:8080', 'https://www.jailors.xyz', 'http
     'https://production-branch.d2np6ogyacfunk.amplifyapp.com']
 
 const corsConfig = {
+    /*
     origin: function(origin, callback) {
         if (corsWhitelist.indexOf(origin) !== -1 || !isProduction) {
             callback(null, true);
@@ -24,6 +25,8 @@ const corsConfig = {
             callback(new Error('Not allowed by CORS'));
         }
     },
+    */
+    origin: corsWhitelist,
     credentials: true
 }
 

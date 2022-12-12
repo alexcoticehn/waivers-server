@@ -42,10 +42,8 @@ if (isDev) {
 } else if (isProduction) {
     const password = encodeURIComponent(process.env.DB_PASSWORD_PROD);
     const username = process.env.DB_USERNAME_PROD;
-    const ip = process.env.DB_IP_PROD;
-    const port_prod = process.env.DB_PORT_PROD;
     const name = process.env.DB_NAME_PROD;
-    mongoose.connect(`mongodb://${username}:${password}@${ip}:${port_prod}/${name}?authSource=admin`, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(`mongodb+srv://${username}:${password}@${name}.hykw9.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 } else if (isStaging) {
     mongoose.connect(process.env.DB_CLOUD_CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true });
 }

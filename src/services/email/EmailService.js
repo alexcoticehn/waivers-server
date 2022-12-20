@@ -1,17 +1,17 @@
-const sendGrid = require('@sendgrid/mail');
+const postmark = require('postmark');
 
 module.exports.sendEmail = async function(recipient, subject, body) {
     let info;
     if (process.env.NODE_ENV === 'production') {
-        sendGrid.setApiKey(process.env.SEND_GRID_API_KEY);
+        const client = new postmark.ServerClient(process.env.POSTMARK_API_TOKEN);
         const message = {
-            to: recipient,
-            from: `Sailor Jerry's League Office <${process.env.JAILORS_EMAIL_ADDRESS}>`,
-            subject: subject,
-            text: body
-        }
+            "To": recipient,
+            "From": `Sailor Jerry's League Office <admin@jailors.xyz>`,
+            "Subject": subject,
+            "TextBody": body
+        };
 
-        info = await sendGrid.send(message);
+        info = client.sendEmail(message); // I think this is synchronous
     } else {
         info = Promise.resolve();
     }
